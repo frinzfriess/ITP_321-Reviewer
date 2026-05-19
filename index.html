@@ -2,11 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-<meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-<meta name="format-detection" content="telephone=no"/>
-<meta name="theme-color" content="#0d1117"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>ITP 321 Reviewer — R / CSV / XML</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -32,38 +28,19 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html, body {
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: transparent;
-  overscroll-behavior-y: contain;
-}
-
 body {
   background: var(--bg);
   color: var(--text);
   font-family: 'Sora', sans-serif;
   min-height: 100vh;
-  min-height: 100dvh;
-  padding-bottom: calc(60px + env(safe-area-inset-bottom));
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
-  -webkit-font-smoothing: antialiased;
-}
-
-button, .choice, .tab, .btn {
-  -webkit-appearance: none;
-  appearance: none;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-  user-select: none;
-  -webkit-user-select: none;
+  padding-bottom: 60px;
 }
 
 /* ── HEADER ── */
 header {
   background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1a2e 100%);
   border-bottom: 1px solid var(--border);
-  padding: calc(40px + env(safe-area-inset-top)) 24px 32px;
+  padding: 40px 24px 32px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -108,7 +85,6 @@ h1 span { color: var(--accent); }
   gap: 6px;
   padding: 20px 24px 0;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   max-width: 960px;
   margin: 0 auto;
@@ -461,21 +437,25 @@ section-divider {
 
 <header>
   <div class="badge">ITP 321 · EXAM REVIEWER</div>
-  <h1>R / CSV / <span>XML</span> Complete Reviewer</h1>
-  <p class="subtitle">All 43 questions · Organized by topic · With quiz mode</p>
+  <h1>R / CSV / XML / <span>ggplot2</span> Complete Reviewer</h1>
+  <p class="subtitle">All topics · Definitions · Scripts · Data Viz · Quiz mode</p>
 </header>
 
 <div class="wrapper">
   <div class="tabs">
-    <button class="tab active" onclick="showSection('cheatsheet', this)">⚡ Cheat Sheet</button>
-    <button class="tab" onclick="showSection('csv', this)">📄 CSV</button>
-    <button class="tab" onclick="showSection('xml', this)">🔖 XML</button>
-    <button class="tab" onclick="showSection('workdir', this)">📁 Working Dir</button>
-    <button class="tab" onclick="showSection('functions', this)">⚙️ Functions</button>
-    <button class="tab" onclick="showSection('loops', this)">🔁 Loops</button>
-    <button class="tab" onclick="showSection('mustmemorize', this)">📝 Must Memorize</button>
-    <button class="tab" onclick="showSection('quiz', this)">🧠 Quiz</button>
-    <button class="tab" onclick="showSection('answers', this)">✅ Answer Key</button>
+    <button class="tab active" onclick="showSection('cheatsheet')">⚡ Cheat Sheet</button>
+    <button class="tab" onclick="showSection('definitions')">📖 Definitions</button>
+    <button class="tab" onclick="showSection('csv')">📄 CSV</button>
+    <button class="tab" onclick="showSection('xml')">🔖 XML</button>
+    <button class="tab" onclick="showSection('workdir')">📁 Working Dir</button>
+    <button class="tab" onclick="showSection('functions')">⚙️ Functions</button>
+    <button class="tab" onclick="showSection('loops')">🔁 Loops</button>
+    <button class="tab" onclick="showSection('dataviz')">📊 Data Viz</button>
+    <button class="tab" onclick="showSection('datasci')">🔬 Data Science</button>
+    <button class="tab" onclick="showSection('ggplot')">🎨 ggplot2</button>
+    <button class="tab" onclick="showSection('mustmemorize')">📝 Must Memorize</button>
+    <button class="tab" onclick="showSection('quiz')">🧠 Quiz</button>
+    <button class="tab" onclick="showSection('answers')">✅ Answer Key</button>
   </div>
 
   <!-- ═══════════════════════════════════════════════
@@ -511,6 +491,22 @@ section-divider {
       <tr><td>Stop a repeat loop</td><td><span style="font-family:'JetBrains Mono',monospace;color:#d2a8ff">break</span></td></tr>
       <tr><td>While loop runs while…</td><td>condition is <strong style="color:#3fb950">TRUE</strong></td></tr>
       <tr><td>Check if xlsx installed</td><td><span style="font-family:'JetBrains Mono',monospace;color:#d2a8ff;font-size:12px">any(grepl("xlsx",installed.packages()))</span></td></tr>
+      <tr><td>Is object a data frame?</td><td><span style="font-family:'JetBrains Mono',monospace;color:#d2a8ff">is.data.frame(data)</span></td></tr>
+      <tr><td>Count columns</td><td><span style="font-family:'JetBrains Mono',monospace;color:#d2a8ff">ncol(data)</span></td></tr>
+      <tr><td>Count rows</td><td><span style="font-family:'JetBrains Mono',monospace;color:#d2a8ff">nrow(data)</span></td></tr>
+      <tr><td>XML node count</td><td><span style="font-family:'JetBrains Mono',monospace;color:#d2a8ff">xmlSize(rootnode)</span></td></tr>
+      <tr><td>XML to data frame</td><td><span style="font-family:'JetBrains Mono',monospace;color:#d2a8ff">xmlToDataFrame("record.xml")</span></td></tr>
+      <tr><td>Read Excel file</td><td><span style="font-family:'JetBrains Mono',monospace;color:#d2a8ff">read_excel("input.xlsx")</span> via readxl</td></tr>
+      <tr><td>Pie chart</td><td><span style="font-family:'JetBrains Mono',monospace;color:#d2a8ff">pie(values, labels)</span></td></tr>
+      <tr><td>Boxplot formula</td><td><span style="font-family:'JetBrains Mono',monospace;color:#d2a8ff">boxplot(y ~ x, data=dataset)</span></td></tr>
+      <tr><td>Histogram</td><td><span style="font-family:'JetBrains Mono',monospace;color:#d2a8ff">hist(values, main="Title")</span></td></tr>
+      <tr><td>ggplot scatter</td><td><span style="font-family:'JetBrains Mono',monospace;color:#d2a8ff">ggplot(data=df) + geom_point(aes(x,y))</span></td></tr>
+      <tr><td>ggplot facets</td><td><span style="font-family:'JetBrains Mono',monospace;color:#d2a8ff">facet_wrap(~ variable, nrow=2)</span></td></tr>
+      <tr><td>aes() does</td><td>maps variables to visual properties (x, y, color, size, shape)</td></tr>
+      <tr><td>plot type p / l / o</td><td>points / lines / points and lines</td></tr>
+      <tr><td>Data Science = </td><td>turns raw data into understanding, insight, and knowledge</td></tr>
+      <tr><td>Supervised learning</td><td>prediction using existing labeled/historical data</td></tr>
+      <tr><td>Unsupervised learning</td><td>pattern discovery without labels; clustering is common</td></tr>
     </table>
 
     <div class="topic-header" style="padding-top:8px">
@@ -529,6 +525,12 @@ section-divider {
     <div class="trap"><strong>User-defined ≠ built-in</strong> — Functions you write yourself = user-defined. print(), sum() etc = built-in (in-built).</div>
     <div class="trap"><strong>grepl is NOT an Excel package</strong> — grepl is a pattern matching function. Excel packages = XLConnect, gdata, xlsx.</div>
     <div class="trap"><strong>$ sign accesses columns</strong> — <code style="color:#3fb950">data$salary</code>, not @, #, &amp;, or *.</div>
+    <div class="trap"><strong>&gt; vs &gt;= for dates</strong> — "after" uses <code style="color:#ff7b72">&gt;</code>; "on or after" uses <code style="color:#3fb950">&gt;=</code>. Know the difference!</div>
+    <div class="trap"><strong>Use straight quotes in R</strong> — curly/smart quotes " " cause errors when pasted into R. Always use " ".</div>
+    <div class="trap"><strong>== inside subset(), not =</strong> — <code style="color:#3fb950">subset(data, salary == max(salary))</code>. Single = is for assignment or function args.</div>
+    <div class="trap"><strong>row.names = FALSE in write.csv()</strong> — avoids adding an unwanted extra row-number column to your output file.</div>
+    <div class="trap"><strong>tibble() over data_frame()</strong> — data_frame() is deprecated in newer tidyverse. Always use <code style="color:#3fb950">tibble()</code>.</div>
+    <div class="trap"><strong>ggplot always starts with ggplot() + geom</strong> — every plot needs ggplot(data=...) AND at least one geom like geom_point().</div>
   </div>
 
   <!-- ═══════════════════════════════════════════════
@@ -613,6 +615,112 @@ section-divider {
       <h4 style="color:#ff7b72">⚠️ Date Filter Trap (Q4)</h4>
       Dates that do <strong>NOT</strong> belong in <code>subset(data, as.Date(start_date) &gt; as.Date("2014-01-06"))</code> are <strong style="color:#ff7b72">2014-01-01</strong> and <strong style="color:#ff7b72">2014-01-02</strong> — because they are before Jan 6, 2014.
     </div>
+
+    <div class="topic-header" style="padding-top:4px">
+      <div class="topic-icon" style="background:#162417">🔍</div>
+      <div><div class="topic-title c-green">Data Frame Analysis Functions (NEW)</div></div>
+    </div>
+<div class="code-block"><span class="op">data</span> <span class="kw">&lt;-</span> <span class="fn">read.csv</span>(<span class="str">"employee.csv"</span>)
+
+<span class="cm"># Check if it is a data frame → TRUE</span>
+<span class="fn">print</span>(<span class="fn">is.data.frame</span>(data))
+
+<span class="cm"># Count columns</span>
+<span class="fn">print</span>(<span class="fn">ncol</span>(data))
+
+<span class="cm"># Count rows</span>
+<span class="fn">print</span>(<span class="fn">nrow</span>(data))
+
+<span class="cm"># Get max and min salary</span>
+<span class="fn">print</span>(<span class="fn">max</span>(data<span class="kw">$</span>salary))
+<span class="fn">print</span>(<span class="fn">min</span>(data<span class="kw">$</span>salary))</div>
+
+    <div class="topic-header" style="padding-top:4px">
+      <div class="topic-icon" style="background:#162417">💻</div>
+      <div><div class="topic-title c-green">Write CSV with row.names = FALSE (NEW)</div></div>
+    </div>
+<div class="code-block"><span class="op">data</span> <span class="kw">&lt;-</span> <span class="fn">read.csv</span>(<span class="str">"employee.csv"</span>)
+<span class="op">retval</span> <span class="kw">&lt;-</span> <span class="fn">subset</span>(data, <span class="fn">as.Date</span>(start_date) <span class="kw">&gt;</span> <span class="fn">as.Date</span>(<span class="str">"2014-01-01"</span>))
+
+<span class="cm"># row.names=FALSE avoids extra row-number column in output</span>
+<span class="fn">write.csv</span>(retval, file <span class="kw">=</span> <span class="str">"output.csv"</span>, row.names <span class="kw">=</span> <span class="kw">FALSE</span>)
+
+<span class="op">newdata</span> <span class="kw">&lt;-</span> <span class="fn">read.csv</span>(<span class="str">"output.csv"</span>)
+<span class="fn">print</span>(newdata)</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       DEFINITIONS
+  ════════════════════════════════════════════════ -->
+  <div class="section" id="definitions">
+    <div class="topic-header">
+      <div class="topic-icon" style="background:#1e1630">📖</div>
+      <div>
+        <div class="topic-title c-purple">Definitions</div>
+        <div class="topic-desc">All key terms from the lessons — memorize these</div>
+      </div>
+    </div>
+
+    <table class="quick-table">
+      <tr><th>Term</th><th>Meaning</th></tr>
+      <tr><td>Data Science</td><td>A discipline that uses tools, algorithms, and machine learning principles to discover hidden patterns from raw data and turn it into understanding, insight, and knowledge.</td></tr>
+      <tr><td>Predictive Causal Analytics</td><td>Used when you need a model that predicts the possibility of a future event.</td></tr>
+      <tr><td>Prescriptive Analytics</td><td>Does not only predict outcomes but also suggests actions and possible results.</td></tr>
+      <tr><td>Machine Learning for Prediction</td><td>Supervised learning — uses existing labeled or historical data to train a model for future prediction.</td></tr>
+      <tr><td>Machine Learning for Pattern Discovery</td><td>Unsupervised learning — no predefined labels; discovers hidden patterns. Clustering is a common example.</td></tr>
+      <tr><td>Data Exploration</td><td>Looking at data, generating hypotheses, testing them quickly, and repeating the process to find promising leads.</td></tr>
+      <tr><td>CSV</td><td>Comma Separated Values. A plain text file where values are separated by commas. Can be opened in Excel.</td></tr>
+      <tr><td>Working Directory</td><td>The folder R uses to read files and save output unless another path is specified.</td></tr>
+      <tr><td>Data Frame</td><td>A rectangular collection of data — variables in columns, observations in rows.</td></tr>
+      <tr><td>XML</td><td>Extensible Markup Language. Text-based format using tags to describe data meaning — unlike HTML which describes page structure.</td></tr>
+      <tr><td>Root Node</td><td>The top-level node or main parent element of an XML document.</td></tr>
+      <tr><td>Excel File</td><td>Spreadsheet file saved as .xls or .xlsx. R reads it using xlsx, readxl, XLConnect, or gdata packages.</td></tr>
+      <tr><td>Tidyverse</td><td>A collection of R packages for data science — importing, cleaning, transforming, and visualizing data.</td></tr>
+      <tr><td>Tibble / tbl_df</td><td>A modern version of a data frame with cleaner printing, especially for large datasets.</td></tr>
+      <tr><td>ggplot2</td><td>A plotting system in R — provide data, map variables to aesthetics, choose geoms, and ggplot handles the rest.</td></tr>
+      <tr><td>Aesthetic Mapping</td><td>Mapping of data variables to visual properties — x, y, color, size, or shape.</td></tr>
+      <tr><td>Facet</td><td>A small subplot showing a subset of data. Commonly created using facet_wrap().</td></tr>
+      <tr><td>Geom</td><td>The geometric object representing data in a plot — points, lines, bars, or smooth curves.</td></tr>
+      <tr><td>Negative Correlation</td><td>A relationship where one variable increases as the other decreases.</td></tr>
+    </table>
+
+    <div class="topic-header" style="padding-top:4px">
+      <div class="topic-icon" style="background:#1e1630">📋</div>
+      <div><div class="topic-title c-purple">Enumerations — Lists to Know</div></div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label bg-green">Excel packages</div>
+        <div class="card-title">Excel-related packages</div>
+        <div class="card-body">xlsx · XLConnect · gdata · readxl</div>
+      </div>
+      <div class="card">
+        <div class="card-label bg-orange">XML packages</div>
+        <div class="card-title">XML-related packages/functions</div>
+        <div class="card-body">XML package · methods package · xmlParse() · xmlRoot() · xmlSize() · xmlToDataFrame()</div>
+      </div>
+      <div class="card">
+        <div class="card-label bg-blue">CSV functions</div>
+        <div class="card-title">CSV/data frame helpers</div>
+        <div class="card-body">getwd() · setwd() · read.csv() · write.csv() · is.data.frame() · ncol() · nrow() · max() · min() · subset() · as.Date()</div>
+      </div>
+      <div class="card">
+        <div class="card-label bg-purple">Visualization</div>
+        <div class="card-title">Data visualization functions</div>
+        <div class="card-body">pie() · barplot() · boxplot() · hist() · plot() · ggplot()</div>
+      </div>
+      <div class="card">
+        <div class="card-label bg-blue">Plot types</div>
+        <div class="card-title">Base R plot type letters</div>
+        <div class="card-body"><strong>p</strong> = points · <strong>l</strong> = lines · <strong>o / O</strong> = points and lines</div>
+      </div>
+      <div class="card">
+        <div class="card-label bg-green">Analytics types</div>
+        <div class="card-title">Analytics in data science</div>
+        <div class="card-body">Predictive causal analytics · Prescriptive analytics · Machine learning (supervised + unsupervised)</div>
+      </div>
+    </div>
   </div>
 
   <!-- ═══════════════════════════════════════════════
@@ -671,6 +779,35 @@ section-divider {
 
 <span class="cm"># Print first node</span>
 <span class="fn">print</span>(rootnode[<span class="kw">1</span>])  <span class="cm"># ← answer: 1</span></div>
+
+    <div class="topic-header" style="padding-top:4px">
+      <div class="topic-icon" style="background:#2a1f10">💻</div>
+      <div><div class="topic-title c-orange">xmlSize() and xmlToDataFrame() (NEW)</div></div>
+    </div>
+<div class="code-block"><span class="fn">library</span>(<span class="str">"XML"</span>)
+<span class="fn">library</span>(<span class="str">"methods"</span>)
+<span class="op">result</span> <span class="kw">&lt;-</span> <span class="fn">xmlParse</span>(file <span class="kw">=</span> <span class="str">"record.xml"</span>)
+<span class="op">rootnode</span> <span class="kw">&lt;-</span> <span class="fn">xmlRoot</span>(result)
+
+<span class="cm"># Count how many nodes are in the root</span>
+<span class="op">rootsize</span> <span class="kw">&lt;-</span> <span class="fn">xmlSize</span>(rootnode)
+<span class="fn">print</span>(rootsize)
+
+<span class="cm"># Convert entire XML directly to a data frame</span>
+<span class="op">xmldataframe</span> <span class="kw">&lt;-</span> <span class="fn">xmlToDataFrame</span>(<span class="str">"record.xml"</span>)
+<span class="fn">print</span>(xmldataframe)</div>
+
+    <div class="topic-header" style="padding-top:4px">
+      <div class="topic-icon" style="background:#2a1f10">💻</div>
+      <div><div class="topic-title c-orange">Read Excel with readxl (NEW)</div></div>
+    </div>
+<div class="code-block"><span class="fn">library</span>(readxl)
+
+<span class="cm"># Read .xlsx file into a data frame-like object</span>
+<span class="op">input</span> <span class="kw">&lt;-</span> <span class="fn">read_excel</span>(<span class="str">"input.xlsx"</span>)
+
+<span class="cm"># View() opens data viewer in RStudio</span>
+<span class="fn">View</span>(input)</div>
   </div>
 
   <!-- ═══════════════════════════════════════════════
@@ -872,6 +1009,206 @@ section-divider {
   </div>
 
   <!-- ═══════════════════════════════════════════════
+       DATA VISUALIZATION
+  ════════════════════════════════════════════════ -->
+  <div class="section" id="dataviz">
+    <div class="topic-header">
+      <div class="topic-icon" style="background:#2a1f10">📊</div>
+      <div>
+        <div class="topic-title c-orange">Data Visualization in R</div>
+        <div class="topic-desc">pie(), boxplot(), hist(), plot() — base R charts</div>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card"><div class="card-label bg-orange">Function</div><div class="card-title">pie()</div><div class="card-body">Creates a pie chart.<br><code>pie(values, labels)</code><br>values = slice sizes, labels = names</div></div>
+      <div class="card"><div class="card-label bg-orange">Function</div><div class="card-title">boxplot()</div><div class="card-body">Creates a boxplot. Use formula syntax to group.<br><code>boxplot(y ~ x, data=dataset)</code></div></div>
+      <div class="card"><div class="card-label bg-orange">Function</div><div class="card-title">hist()</div><div class="card-body">Creates a histogram of frequency distribution.<br><code>hist(values, main="Title", col="green")</code></div></div>
+      <div class="card"><div class="card-label bg-blue">Param</div><div class="card-title">notch = TRUE</div><div class="card-body">Adds a notch to a boxplot for comparing medians between groups visually.</div></div>
+      <div class="card"><div class="card-label bg-blue">Formula</div><div class="card-title">mpg ~ cyl</div><div class="card-body">Group mpg by cyl — "y ~ x" means group the y variable by the x variable.</div></div>
+      <div class="card"><div class="card-label bg-green">Plot types</div><div class="card-title">Base R type= letters</div><div class="card-body"><strong>p</strong> = points · <strong>l</strong> = lines · <strong>o / O</strong> = points and lines</div></div>
+    </div>
+
+    <div class="topic-header" style="padding-top:4px">
+      <div class="topic-icon" style="background:#2a1f10">💻</div>
+      <div><div class="topic-title c-orange">Pie chart script</div></div>
+    </div>
+<div class="code-block"><span class="op">vtr</span> <span class="kw">&lt;-</span> c(<span class="kw">14</span>, <span class="kw">28</span>, <span class="kw">11</span>, <span class="kw">30</span>, <span class="kw">17</span>)
+<span class="op">name</span> <span class="kw">&lt;-</span> c(<span class="str">"R&D"</span>, <span class="str">"Marketing"</span>, <span class="str">"Corporate"</span>, <span class="str">"Sales"</span>, <span class="str">"Support"</span>)
+<span class="fn">pie</span>(vtr, name)  <span class="cm"># vtr = values/slices, name = labels</span></div>
+
+    <div class="topic-header" style="padding-top:4px">
+      <div class="topic-icon" style="background:#2a1f10">💻</div>
+      <div><div class="topic-title c-orange">Boxplot scripts</div></div>
+    </div>
+<div class="code-block"><span class="cm"># Basic boxplot</span>
+<span class="fn">boxplot</span>(mtcars<span class="kw">$</span>mpg)
+
+<span class="cm"># With title, labels, color</span>
+<span class="fn">boxplot</span>(mtcars<span class="kw">$</span>mpg,
+  main <span class="kw">=</span> <span class="str">"Mileage Data Boxplot"</span>,
+  ylab <span class="kw">=</span> <span class="str">"Miles per Gallon"</span>,
+  xlab <span class="kw">=</span> <span class="str">"No. of Cylinders"</span>,
+  col  <span class="kw">=</span> <span class="str">"yellow"</span>)
+
+<span class="cm"># Formula boxplot: group mpg by cyl</span>
+<span class="fn">boxplot</span>(mpg <span class="kw">~</span> cyl, data <span class="kw">=</span> mtcars,
+  main  <span class="kw">=</span> <span class="str">"Mileage Data Boxplot"</span>,
+  ylab  <span class="kw">=</span> <span class="str">"Miles per Gallon"</span>,
+  xlab  <span class="kw">=</span> <span class="str">"No. of Cylinders"</span>,
+  col   <span class="kw">=</span> <span class="str">"gold"</span>)
+
+<span class="cm"># Notched boxplot (notch compares medians)</span>
+<span class="fn">boxplot</span>(mpg <span class="kw">~</span> cyl, data <span class="kw">=</span> mtcars,
+  col   <span class="kw">=</span> <span class="str">"lightblue"</span>,
+  notch <span class="kw">=</span> <span class="kw">TRUE</span>)</div>
+
+    <div class="topic-header" style="padding-top:4px">
+      <div class="topic-icon" style="background:#2a1f10">💻</div>
+      <div><div class="topic-title c-orange">Histogram script</div></div>
+    </div>
+<div class="code-block"><span class="op">temp</span> <span class="kw">&lt;-</span> c(<span class="kw">67</span>, <span class="kw">72</span>, <span class="kw">74</span>, <span class="kw">62</span>, <span class="kw">76</span>, <span class="kw">66</span>, <span class="kw">65</span>, <span class="kw">59</span>, <span class="kw">61</span>, <span class="kw">69</span>)
+<span class="op">result</span> <span class="kw">&lt;-</span> <span class="fn">hist</span>(temp,
+  main <span class="kw">=</span> <span class="str">"Histogram of Temperature"</span>,
+  xlab <span class="kw">=</span> <span class="str">"temp in fahrenheit"</span>,
+  col  <span class="kw">=</span> <span class="str">"green"</span>)
+<span class="fn">print</span>(result)</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       DATA SCIENCE
+  ════════════════════════════════════════════════ -->
+  <div class="section" id="datasci">
+    <div class="topic-header">
+      <div class="topic-icon" style="background:#1a2c3d">🔬</div>
+      <div>
+        <div class="topic-title c-blue">Data Science in R</div>
+        <div class="topic-desc">Definitions, analytics types, machine learning concepts</div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <h4>What is Data Science?</h4>
+      Data Science is a discipline that uses tools, algorithms, and machine learning principles to <strong>discover hidden patterns from raw data</strong> and turn raw data into <strong>understanding, insight, and knowledge</strong>.
+    </div>
+
+    <div class="card-grid">
+      <div class="card"><div class="card-label bg-blue">Analytics</div><div class="card-title">Predictive Causal Analytics</div><div class="card-body">Used when you need a model that <strong>predicts the possibility of a future event</strong>.</div></div>
+      <div class="card"><div class="card-label bg-blue">Analytics</div><div class="card-title">Prescriptive Analytics</div><div class="card-body">Does not only predict outcomes — also <strong>suggests actions and possible results</strong>.</div></div>
+      <div class="card"><div class="card-label bg-green">ML</div><div class="card-title">Supervised Learning</div><div class="card-body">Uses <strong>existing labeled or historical data</strong> to train a model for future prediction.</div></div>
+      <div class="card"><div class="card-label bg-green">ML</div><div class="card-title">Unsupervised Learning</div><div class="card-body">No predefined labels — discovers <strong>hidden patterns</strong>. <strong>Clustering</strong> is a common example.</div></div>
+      <div class="card"><div class="card-label bg-purple">Process</div><div class="card-title">Data Exploration</div><div class="card-body">Looking at data, generating hypotheses, testing them quickly, and repeating to find promising leads.</div></div>
+      <div class="card"><div class="card-label bg-orange">Correlation</div><div class="card-title">Negative Correlation</div><div class="card-body">One variable increases as the other <strong>decreases</strong>. Example: engine size ↑ = fuel efficiency ↓.</div></div>
+    </div>
+
+    <table class="quick-table" style="margin-top:8px">
+      <tr><th>Question pattern</th><th>Answer</th></tr>
+      <tr><td>Data Science definition</td><td>turns raw data into understanding, insight, and knowledge</td></tr>
+      <tr><td>Predicts future event</td><td>Predictive Causal Analytics</td></tr>
+      <tr><td>Suggests actions too</td><td>Prescriptive Analytics</td></tr>
+      <tr><td>Uses labeled historical data</td><td>Supervised Learning (Machine Learning for Prediction)</td></tr>
+      <tr><td>Discovers patterns, no labels</td><td>Unsupervised Learning (Machine Learning for Pattern Discovery)</td></tr>
+      <tr><td>Clustering is an example of</td><td>Unsupervised Learning</td></tr>
+      <tr><td>displ ↑ → hwy ↓ in ggplot</td><td>Negative correlation / negative relationship</td></tr>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       GGPLOT2
+  ════════════════════════════════════════════════ -->
+  <div class="section" id="ggplot">
+    <div class="topic-header">
+      <div class="topic-icon" style="background:#1e1630">🎨</div>
+      <div>
+        <div class="topic-title c-purple">Tidyverse and ggplot2</div>
+        <div class="topic-desc">tibble, aes(), geom_point(), facet_wrap(), geom_smooth()</div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <h4>ggplot2 structure</h4>
+      Every ggplot plot follows: <strong>ggplot(data = ...) + geom_*(mapping = aes(...))</strong><br>
+      You provide the data, map variables to aesthetics, and choose a geom. ggplot handles the rest.
+    </div>
+
+    <div class="card-grid">
+      <div class="card"><div class="card-label bg-purple">Concept</div><div class="card-title">aes() — aesthetic mapping</div><div class="card-body">Maps data variables to visual properties: <strong>x, y, color, size, shape</strong>.</div></div>
+      <div class="card"><div class="card-label bg-purple">Geom</div><div class="card-title">geom_point()</div><div class="card-body">Creates a <strong>scatter plot</strong> — plots individual data points.</div></div>
+      <div class="card"><div class="card-label bg-purple">Geom</div><div class="card-title">geom_smooth()</div><div class="card-body">Adds a <strong>smooth curve</strong> (trend line) to the plot.</div></div>
+      <div class="card"><div class="card-label bg-purple">Geom</div><div class="card-title">geom_line()</div><div class="card-body">Connects data points with <strong>lines</strong>.</div></div>
+      <div class="card"><div class="card-label bg-blue">Function</div><div class="card-title">facet_wrap(~ class)</div><div class="card-body">Splits plot into <strong>subplots by category</strong>. The ~ means "by" or "as a function of".</div></div>
+      <div class="card"><div class="card-label bg-green">Data</div><div class="card-title">Tibble / tbl_df</div><div class="card-body">Modern data frame with cleaner printing. Use <code>tibble()</code> — not the deprecated <code>data_frame()</code>.</div></div>
+    </div>
+
+    <div class="topic-header" style="padding-top:4px">
+      <div class="topic-icon" style="background:#1e1630">💻</div>
+      <div><div class="topic-title c-purple">Create a tibble</div></div>
+    </div>
+<div class="code-block"><span class="fn">library</span>(tidyverse)
+
+<span class="cm"># tibble() is preferred over deprecated data_frame()</span>
+<span class="op">friends_data</span> <span class="kw">&lt;-</span> <span class="fn">tibble</span>(
+  name    <span class="kw">=</span> c(<span class="str">"Nicolas"</span>, <span class="str">"Thierry"</span>, <span class="str">"Bernard"</span>, <span class="str">"Jerome"</span>),
+  age     <span class="kw">=</span> c(<span class="kw">27</span>, <span class="kw">25</span>, <span class="kw">29</span>, <span class="kw">26</span>),
+  height  <span class="kw">=</span> c(<span class="kw">180</span>, <span class="kw">170</span>, <span class="kw">185</span>, <span class="kw">169</span>),
+  married <span class="kw">=</span> c(<span class="kw">TRUE</span>, <span class="kw">FALSE</span>, <span class="kw">TRUE</span>, <span class="kw">TRUE</span>)
+)
+<span class="fn">print</span>(friends_data)</div>
+
+    <div class="topic-header" style="padding-top:4px">
+      <div class="topic-icon" style="background:#1e1630">💻</div>
+      <div><div class="topic-title c-purple">ggplot scatter plot</div></div>
+    </div>
+<div class="code-block"><span class="cm"># Basic scatter: engine size vs highway fuel efficiency</span>
+<span class="fn">ggplot</span>(data <span class="kw">=</span> mpg) <span class="kw">+</span>
+  <span class="fn">geom_point</span>(mapping <span class="kw">=</span> <span class="fn">aes</span>(x <span class="kw">=</span> displ, y <span class="kw">=</span> hwy))
+
+<span class="cm"># Negative correlation: as displ increases, hwy decreases</span></div>
+
+    <div class="topic-header" style="padding-top:4px">
+      <div class="topic-icon" style="background:#1e1630">💻</div>
+      <div><div class="topic-title c-purple">Color aesthetic + facets</div></div>
+    </div>
+<div class="code-block"><span class="cm"># Color by vehicle class</span>
+<span class="fn">ggplot</span>(data <span class="kw">=</span> mpg) <span class="kw">+</span>
+  <span class="fn">geom_point</span>(mapping <span class="kw">=</span> <span class="fn">aes</span>(x <span class="kw">=</span> displ, y <span class="kw">=</span> hwy, color <span class="kw">=</span> class))
+
+<span class="cm"># Facet: split into subplots by class</span>
+<span class="fn">ggplot</span>(data <span class="kw">=</span> mpg) <span class="kw">+</span>
+  <span class="fn">geom_point</span>(mapping <span class="kw">=</span> <span class="fn">aes</span>(x <span class="kw">=</span> displ, y <span class="kw">=</span> hwy)) <span class="kw">+</span>
+  <span class="fn">facet_wrap</span>(<span class="kw">~</span> class, nrow <span class="kw">=</span> <span class="kw">2</span>)</div>
+
+    <div class="topic-header" style="padding-top:4px">
+      <div class="topic-icon" style="background:#1e1630">💻</div>
+      <div><div class="topic-title c-purple">geom_smooth + geom_line (BOD dataset)</div></div>
+    </div>
+<div class="code-block"><span class="fn">library</span>(tidyverse)
+
+<span class="cm"># Smooth curve</span>
+<span class="fn">ggplot</span>(data <span class="kw">=</span> mpg) <span class="kw">+</span>
+  <span class="fn">geom_smooth</span>(mapping <span class="kw">=</span> <span class="fn">aes</span>(x <span class="kw">=</span> displ, y <span class="kw">=</span> hwy))
+
+<span class="cm"># BOD dataset: points + line</span>
+<span class="fn">ggplot</span>(data <span class="kw">=</span> BOD, mapping <span class="kw">=</span> <span class="fn">aes</span>(x <span class="kw">=</span> Time, y <span class="kw">=</span> demand)) <span class="kw">+</span>
+  <span class="fn">geom_point</span>(size <span class="kw">=</span> <span class="kw">5</span>) <span class="kw">+</span>
+  <span class="fn">geom_line</span>(color <span class="kw">=</span> <span class="str">"red"</span>)</div>
+
+    <table class="quick-table" style="margin-top:8px">
+      <tr><th>Question pattern</th><th>Answer</th></tr>
+      <tr><td>What does aes() do?</td><td>Maps variables to visual properties (x, y, color, size, shape)</td></tr>
+      <tr><td>What does geom_point() create?</td><td>A scatter plot / points</td></tr>
+      <tr><td>What does geom_smooth() create?</td><td>A smooth curve / trend line</td></tr>
+      <tr><td>What does geom_line() create?</td><td>Lines connecting data points</td></tr>
+      <tr><td>What does facet_wrap(~ class) do?</td><td>Creates subplots split by the class variable</td></tr>
+      <tr><td>What does ~ mean in facet_wrap?</td><td>"by" or "as a function of"</td></tr>
+      <tr><td>In boxplot(mpg ~ cyl), what is y?</td><td>mpg</td></tr>
+      <tr><td>In boxplot(mpg ~ cyl), what is x?</td><td>cyl</td></tr>
+      <tr><td>color = class in aes() does?</td><td>Displays different vehicle classes in different colors</td></tr>
+      <tr><td>tibble() vs data_frame()</td><td>data_frame() is deprecated — use tibble()</td></tr>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
        MUST MEMORIZE
   ════════════════════════════════════════════════ -->
   <div class="section" id="mustmemorize">
@@ -986,6 +1323,19 @@ data<span class="kw">$</span>column_name                    <span class="cm"># a
       <tr><td>function(a) { }</td><td>Define a function with argument a</td></tr>
       <tr><td>break</td><td>Stop/exit a repeat or any loop</td></tr>
       <tr><td>i^2</td><td>Square a number (^ = exponent)</td></tr>
+      <tr><td>is.data.frame(data)</td><td>Check if an object is a data frame — returns TRUE/FALSE</td></tr>
+      <tr><td>ncol(data)</td><td>Get number of columns in a data frame</td></tr>
+      <tr><td>nrow(data)</td><td>Get number of rows in a data frame</td></tr>
+      <tr><td>min(data$column)</td><td>Get the minimum value in a column</td></tr>
+      <tr><td>xmlSize(rootnode)</td><td>Count the number of nodes in the XML root</td></tr>
+      <tr><td>xmlToDataFrame("file.xml")</td><td>Convert an XML file directly into a data frame</td></tr>
+      <tr><td>read_excel("file.xlsx")</td><td>Read an Excel file via the readxl package</td></tr>
+      <tr><td>pie(values, labels)</td><td>Create a pie chart with given values and label names</td></tr>
+      <tr><td>boxplot(y ~ x, data=df)</td><td>Boxplot grouped by x variable (formula syntax)</td></tr>
+      <tr><td>hist(values, col="green")</td><td>Create a histogram</td></tr>
+      <tr><td>ggplot(data=df) + geom_point(aes(x,y))</td><td>Basic ggplot scatter plot</td></tr>
+      <tr><td>facet_wrap(~ variable, nrow=2)</td><td>Split ggplot into subplots by category</td></tr>
+      <tr><td>tibble(col = c(...))</td><td>Create a modern data frame (preferred over data_frame())</td></tr>
     </table>
   </div>
 
@@ -1048,18 +1398,11 @@ data<span class="kw">$</span>column_name                    <span class="cm"># a
 
 <script>
 // ── TAB NAVIGATION ──
-function showSection(id, el) {
+function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  // iOS Safari doesn't reliably populate the global `event` object,
-  // so we pass the clicked element explicitly.
-  const target = el || (typeof event !== 'undefined' && event && event.currentTarget) || null;
-  if (target && target.classList) target.classList.add('active');
-  // Scroll active tab into view on mobile
-  if (target && target.scrollIntoView) {
-    target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-  }
+  event.target.classList.add('active');
 }
 
 // ── QUIZ DATA ──
