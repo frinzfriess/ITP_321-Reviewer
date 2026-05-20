@@ -577,6 +577,7 @@ section-divider {
     <button class="tab" onclick="showSection('mustmemorize')">📝 Must Memorize</button>
     <button class="tab" onclick="showSection('quiz')">🧠 Quiz 1</button>
     <button class="tab" onclick="showSection('quiz2')">🧠 Quiz 2</button>
+    <button class="tab" onclick="showSection('quiz3')">🧩 Quiz 3</button>
     <button class="tab" onclick="showSection('answers')">✅ Answer Key</button>
   </div>
 
@@ -1556,6 +1557,57 @@ data<span class="kw">$</span>column_name                    <span class="cm"># a
   </div>
 
   <!-- ═══════════════════════════════════════════════
+       QUIZ 3
+  ════════════════════════════════════════════════ -->
+  <div class="section" id="quiz3">
+    <div class="topic-header">
+      <div class="topic-icon" style="background:#162417">🧩</div>
+      <div>
+        <div class="topic-title c-green">Quiz 3 — Enumerations, Results & Fill-in-the-Blanks</div>
+        <div class="topic-desc">What belongs to the group · What does this output · Complete the code</div>
+      </div>
+    </div>
+
+    <div id="q3Container">
+      <div class="quiz-progress">
+        <span id="q3Counter">Question 1 of 30</span>
+        <span id="q3Score">Score: 0</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px;flex-wrap:wrap;">
+        <div class="progress-bar" style="flex:1;margin-bottom:0"><div class="progress-fill" id="progressFill3" style="width:3%"></div></div>
+        <button class="shuffle-btn" id="shuffleBtn3" onclick="toggleShuffle3()">🔀 Shuffle: OFF</button>
+      </div>
+
+      <div class="q-card" id="q3Card">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+          <div class="q-num" id="q3Num" style="margin-bottom:0">Q1</div>
+          <div id="q3TypeTag" style="font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;font-family:'JetBrains Mono',monospace;letter-spacing:.05em"></div>
+        </div>
+        <div id="q3TopicTag"></div>
+        <div class="q-text" id="q3Text"></div>
+        <div id="q3CodeBlock" style="display:none" class="code-block" id="q3Code"></div>
+        <div class="choices" id="q3Choices"></div>
+        <div class="explanation" id="q3Exp"></div>
+      </div>
+
+      <div class="q-nav">
+        <button class="btn" id="prev3Btn" onclick="prevQ3()" disabled>← Prev</button>
+        <button class="btn primary" id="next3Btn" onclick="nextQ3()" disabled>Next →</button>
+      </div>
+    </div>
+
+    <div class="score-box" id="scoreBox3">
+      <div class="score-num" id="finalScore3">0/30</div>
+      <div class="score-label">Questions Answered Correctly</div>
+      <div class="score-msg" id="scoreMsg3"></div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap;">
+        <button class="btn primary" onclick="restartQuiz3(false)">🔁 Restart In Order</button>
+        <button class="btn primary" onclick="restartQuiz3(true)">🔀 Restart Shuffled</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
        ANSWER KEY
   ════════════════════════════════════════════════ -->
   <div class="section" id="answers">
@@ -1929,6 +1981,155 @@ function restartQuiz2(doShuffle) {
 // Init both quizzes
 renderQ();
 renderQ2();
+
+// ── QUIZ 3 DATA — Enumerations, Results, Fill-in-the-Blanks ──
+const questions3 = [
+  // ENUMERATION
+  { n:1, type:'enum', topic:'Packages', color:'bg-green', text:'Which of the following are ALL Excel-related packages in R?', code:null, choices:['xlsx, XLConnect, gdata, readxl','xlsx, XLConnect, grepl, readxl','xlsx, XML, gdata, readxl','xlsx, XLConnect, gdata, xmlParse'], answer:'xlsx, XLConnect, gdata, readxl', exp:'The four Excel packages covered are: xlsx, XLConnect, gdata, and readxl. grepl is for pattern matching; XML and xmlParse are for XML files.' },
+  { n:2, type:'enum', topic:'XML', color:'bg-orange', text:'Which group contains ONLY XML-related functions in R?', code:null, choices:['xmlParse(), xmlRoot(), xmlSize(), xmlToDataFrame()','read.csv(), write.csv(), subset()','getwd(), setwd(), ncol()','pie(), barplot(), hist()'], answer:'xmlParse(), xmlRoot(), xmlSize(), xmlToDataFrame()', exp:'All four — xmlParse(), xmlRoot(), xmlSize(), and xmlToDataFrame() — are part of the XML package.' },
+  { n:3, type:'enum', topic:'CSV', color:'bg-green', text:'Which group contains ONLY CSV and data frame helper functions?', code:null, choices:['read.csv(), write.csv(), subset(), max(), min(), ncol(), nrow()','xmlParse(), xmlRoot(), xmlSize()','pie(), hist(), boxplot(), ggplot()','tibble(), aes(), facet_wrap(), geom_point()'], answer:'read.csv(), write.csv(), subset(), max(), min(), ncol(), nrow()', exp:'read.csv, write.csv, subset, max, min, ncol, and nrow are all standard R functions used with data frames and CSV files.' },
+  { n:4, type:'enum', topic:'ggplot2', color:'bg-purple', text:'Which group contains ONLY ggplot2 geom functions?', code:null, choices:['geom_point(), geom_smooth(), geom_line()','pie(), barplot(), hist()','xmlParse(), xmlRoot()','read.csv(), write.csv()'], answer:'geom_point(), geom_smooth(), geom_line()', exp:'geom_point(), geom_smooth(), and geom_line() are all ggplot2 geometric objects (geoms). Others are base R or XML functions.' },
+  { n:5, type:'enum', topic:'Data Viz', color:'bg-orange', text:'Which group contains ONLY base R data visualization functions?', code:null, choices:['pie(), barplot(), boxplot(), hist(), plot()','ggplot(), geom_point(), aes()','xmlParse(), xmlRoot(), xmlSize()','read.csv(), write.csv(), subset()'], answer:'pie(), barplot(), boxplot(), hist(), plot()', exp:'pie(), barplot(), boxplot(), hist(), and plot() are base R chart functions. ggplot(), geom_point(), and aes() belong to ggplot2.' },
+  { n:6, type:'enum', topic:'Data Viz', color:'bg-orange', text:'What are the correct base R plot() type letters and their meanings?', code:null, choices:['p = points,  l = lines,  o = points and lines','p = pie,  l = labels,  o = outline','p = points,  l = list,  o = oval','p = plot,  l = line,  o = object'], answer:'p = points,  l = lines,  o = points and lines', exp:'In base R plot(): type="p" draws points, type="l" draws lines, type="o" overlays both points and lines.' },
+  { n:7, type:'enum', topic:'ggplot2', color:'bg-purple', text:'Which are valid ggplot2 aesthetic (aes()) properties?', code:null, choices:['x, y, color, size, shape','x, y, width, height, border','left, right, top, bottom, center','data, geom, facet, theme, scale'], answer:'x, y, color, size, shape', exp:'aes() maps data to visual properties. The valid aesthetics discussed are: x, y, color, size, and shape.' },
+  { n:8, type:'enum', topic:'Data Science', color:'bg-blue', text:'Which are the TWO machine learning types discussed in the lesson?', code:null, choices:['Supervised Learning and Unsupervised Learning','Predictive and Prescriptive only','Clustering and Regression only','Deep Learning and Reinforcement Learning'], answer:'Supervised Learning and Unsupervised Learning', exp:'The lesson covers Supervised Learning (prediction using labeled data) and Unsupervised Learning (pattern discovery, e.g. clustering).' },
+  { n:9, type:'enum', topic:'Data Science', color:'bg-blue', text:'Which THREE analytics types are covered in data science in this lesson?', code:null, choices:['Predictive Causal Analytics, Prescriptive Analytics, Machine Learning','Descriptive, Diagnostic, Predictive only','Clustering, Regression, Classification','CSV, XML, and Excel Analytics'], answer:'Predictive Causal Analytics, Prescriptive Analytics, Machine Learning', exp:'The three analytics types are: Predictive Causal Analytics, Prescriptive Analytics, and Machine Learning (supervised & unsupervised).' },
+  { n:10, type:'enum', topic:'Working Dir', color:'bg-blue', text:'Which path formats are ACCEPTED in R?', code:null, choices:['C:/web/Sample  and  C:\\\\web\\\\Sample','C:\\web\\Sample  and  C:/web/Sample','C:\\web\\Sample  only','Any format works including single backslash'], answer:'C:/web/Sample  and  C:\\\\web\\\\Sample', exp:'R accepts forward slashes (C:/web/Sample) and double backslashes (C:\\\\web\\\\Sample). Single backslash is an escape character in R strings.' },
+
+  // KNOW THE RESULT
+  { n:11, type:'result', topic:'While Loop', color:'bg-green', text:'What does this code print?', code:'x <- 1\nwhile (x <= 3) {\n  print(x)\n  x <- x + 1\n}', choices:['1  2  3','1  2  3  4','0  1  2  3','Infinite loop'], answer:'1  2  3', exp:'x starts at 1. Loop prints x then adds 1. When x becomes 4, condition x<=3 is FALSE — loop stops. Output: 1, 2, 3.' },
+  { n:12, type:'result', topic:'Functions', color:'bg-purple', text:'What does this return?', code:'max(c(10, 25, 8, 42, 15))', choices:['42','25','10','15'], answer:'42', exp:'max() returns the largest value. Among 10, 25, 8, 42, 15 — the maximum is 42.' },
+  { n:13, type:'result', topic:'Functions', color:'bg-purple', text:'What does this print?', code:'new.function <- function(a) {\n  for(i in 1:a) {\n    b <- i^2\n    print(b)\n  }\n}\nnew.function(3)', choices:['1  4  9','1  2  3','1  8  27','3  6  9'], answer:'1  4  9', exp:'Loop runs for i=1,2,3. b = i^2: 1^2=1, 2^2=4, 3^2=9. Printed: 1, 4, 9.' },
+  { n:14, type:'result', topic:'CSV', color:'bg-green', text:'What does this return?', code:'data <- read.csv("employee.csv")\nprint(is.data.frame(data))', choices:['TRUE','FALSE','NULL','An error'], answer:'TRUE', exp:'read.csv() always returns a data frame. So is.data.frame(data) returns TRUE.' },
+  { n:15, type:'result', topic:'Repeat Loop', color:'bg-orange', text:'What does this print?', code:'x <- 1\nrepeat {\n  print(x)\n  x <- x + 1\n  if (x > 3) break\n}', choices:['1  2  3','1  2  3  4','2  3  4','Infinite loop'], answer:'1  2  3', exp:'Prints 1, 2, 3. When x becomes 4, the if condition is TRUE and break exits the loop.' },
+  { n:16, type:'result', topic:'Functions', color:'bg-purple', text:'What does this print?', code:'for (i in 1:4) {\n  print(i^2)\n}', choices:['1  4  9  16','1  2  3  4','2  4  6  8','1  4  9'], answer:'1  4  9  16', exp:'i=1→1, i=2→4, i=3→9, i=4→16. Each i^2 is printed: 1, 4, 9, 16.' },
+  { n:17, type:'result', topic:'While Loop', color:'bg-green', text:'What happens when you run this code?', code:'x <- 1\nwhile (TRUE) {\n  print(x)\n  x <- x + 1\n}', choices:['Infinite loop — never stops','Prints 1 then stops','Prints nothing','Returns an error'], answer:'Infinite loop — never stops', exp:'The condition is always TRUE and there is no break statement. This is an infinite loop.' },
+  { n:18, type:'result', topic:'Packages', color:'bg-purple', text:'What does this return if xlsx IS installed?', code:'any(grepl("xlsx", installed.packages()))', choices:['TRUE','FALSE','NULL','"xlsx"'], answer:'TRUE', exp:'grepl() finds "xlsx" matches in installed packages. any() returns TRUE if at least one match is found.' },
+  { n:19, type:'result', topic:'CSV', color:'bg-green', text:'What does subset() return here?', code:'subset(data, salary == max(salary))', choices:['The row(s) with the highest salary','All rows sorted by salary','The max salary number only','An error'], answer:'The row(s) with the highest salary', exp:'subset(data, salary == max(salary)) filters and returns only the row(s) where salary equals the maximum salary.' },
+  { n:20, type:'result', topic:'XML', color:'bg-orange', text:'What does xmlSize() return here?', code:'result <- xmlParse(file = "record.xml")\nrootnode <- xmlRoot(result)\nxmlSize(rootnode)', choices:['The number of child nodes in the root','The root node text content','TRUE','The full XML document'], answer:'The number of child nodes in the root', exp:'xmlSize(rootnode) counts and returns the number of child nodes inside the XML root element.' },
+
+  // FILL IN THE BLANKS
+  { n:21, type:'blank', topic:'CSV', color:'bg-green', text:'Fill in the blank — assign CSV data to a variable:', code:'data ___ read.csv("employee.csv")', choices:['<-','==','->','='], answer:'<-', exp:'<- is the standard assignment operator in R. It assigns the result of read.csv() to the variable "data".' },
+  { n:22, type:'blank', topic:'XML', color:'bg-orange', text:'Fill in the blank — count the XML nodes:', code:'rootnode <- xmlRoot(result)\nrootsize <- ___(rootnode)', choices:['xmlSize','xmlCount','xmlLength','xmlRoot'], answer:'xmlSize', exp:'xmlSize(rootnode) returns the number of child nodes inside the root node.' },
+  { n:23, type:'blank', topic:'CSV', color:'bg-green', text:'Fill in the blank — filter row with the maximum salary:', code:'retval <- subset(data, salary ___ max(salary))', choices:['==','=','>=','<='], answer:'==', exp:'Use == (double equals) for comparison inside subset(). Single = is for assignment, not comparison.' },
+  { n:24, type:'blank', topic:'ggplot2', color:'bg-purple', text:'Fill in the blank — create a scatter plot:', code:'ggplot(data = mpg) +\n  ___(mapping = aes(x = displ, y = hwy))', choices:['geom_point()','geom_line()','geom_smooth()','geom_bar()'], answer:'geom_point()', exp:'geom_point() creates a scatter plot by drawing individual points for each data row.' },
+  { n:25, type:'blank', topic:'Data Viz', color:'bg-orange', text:'Fill in the blank — group mpg by cylinder in a boxplot:', code:'boxplot(mpg ___ cyl, data = mtcars)', choices:['~','$','==','->'], answer:'~', exp:'~ is the formula operator. mpg ~ cyl means "group mpg values by cyl".' },
+  { n:26, type:'blank', topic:'XML', color:'bg-orange', text:'Fill in the blank — load the package needed for read_excel():', code:'library(___)\ninput <- read_excel("input.xlsx")', choices:['readxl','xlsx','XML','gdata'], answer:'readxl', exp:'read_excel() is from the readxl package. You must call library(readxl) before using it.' },
+  { n:27, type:'blank', topic:'ggplot2', color:'bg-purple', text:'Fill in the blank — split the plot into subplots by class:', code:'ggplot(data = mpg) +\n  geom_point(aes(x = displ, y = hwy)) +\n  facet_wrap(___ class, nrow = 2)', choices:['~','$','@','::'], answer:'~', exp:'~ is the formula notation meaning "by". facet_wrap(~ class) creates subplots by class.' },
+  { n:28, type:'blank', topic:'CSV', color:'bg-green', text:'Fill in the blank — write CSV without extra row numbers:', code:'write.csv(retval, file = "output.csv", row.names = ___)', choices:['FALSE','TRUE','NULL','0'], answer:'FALSE', exp:'row.names = FALSE prevents write.csv() from adding an extra row-number column to the output.' },
+  { n:29, type:'blank', topic:'Working Dir', color:'bg-blue', text:'Fill in the blank — check then set the working directory:', code:'print(getwd())\n___(\"C:/web/Sample\")\nprint(getwd())', choices:['setwd','getwd','setdir','workdir'], answer:'setwd', exp:'setwd() sets the working directory. getwd() only reads it. Use setwd("path") to change it.' },
+  { n:30, type:'blank', topic:'ggplot2', color:'bg-purple', text:'Fill in the blank — add a red line connecting the BOD points:', code:'ggplot(data=BOD, mapping=aes(x=Time, y=demand)) +\n  geom_point(size = 5) +\n  ___(color = "red")', choices:['geom_line()','geom_smooth()','geom_bar()','geom_point()'], answer:'geom_line()', exp:'geom_line() draws lines connecting points. geom_point() was already used for the dots; geom_line(color="red") adds the red connecting line.' },
+];
+
+// ── QUIZ 3 STATE ──
+let cur3 = 0, score3 = 0, shuffleOn3 = false;
+let activeQ3 = [...questions3];
+let answered3 = new Array(questions3.length).fill(false);
+
+const typeStyles = {
+  enum:  { bg:'rgba(63,185,80,0.15)',  color:'#3fb950', label:'📋 Enumeration'    },
+  result:{ bg:'rgba(88,166,255,0.15)', color:'#58a6ff', label:'💻 Know the Result' },
+  blank: { bg:'rgba(240,136,62,0.15)', color:'#f0883e', label:'✏️ Fill in the Blank'}
+};
+
+function toggleShuffle3() {
+  shuffleOn3 = !shuffleOn3;
+  const btn = document.getElementById('shuffleBtn3');
+  btn.textContent = shuffleOn3 ? '🔀 Shuffle: ON' : '🔀 Shuffle: OFF';
+  btn.classList.toggle('on', shuffleOn3);
+  restartQuiz3(shuffleOn3);
+}
+
+function renderQ3() {
+  const q = activeQ3[cur3];
+  document.getElementById('q3Num').textContent = `Q${q.n}`;
+  document.getElementById('q3Counter').textContent = `Question ${cur3+1} of ${activeQ3.length}`;
+  document.getElementById('q3Score').textContent = `Score: ${score3}`;
+  document.getElementById('progressFill3').style.width = `${((cur3+1)/activeQ3.length)*100}%`;
+
+  const ts = typeStyles[q.type];
+  const typeTag = document.getElementById('q3TypeTag');
+  typeTag.textContent = ts.label;
+  typeTag.style.cssText = `font-size:10px;padding:2px 10px;border-radius:20px;font-weight:600;font-family:'JetBrains Mono',monospace;letter-spacing:.05em;background:${ts.bg};color:${ts.color};border:1px solid ${ts.color};display:inline-block;margin-bottom:8px;`;
+
+  const topicTag = document.getElementById('q3TopicTag');
+  topicTag.className = `q-topic-tag ${q.color}`;
+  topicTag.textContent = q.topic;
+
+  document.getElementById('q3Text').textContent = q.text;
+
+  const codeEl = document.getElementById('q3CodeBlock');
+  if (q.code) { codeEl.style.display = 'block'; codeEl.textContent = q.code; }
+  else { codeEl.style.display = 'none'; }
+
+  const displayChoices = shuffleOn3 ? shuffle(q.choices) : q.choices;
+  const choicesEl = document.getElementById('q3Choices');
+  choicesEl.innerHTML = '';
+  displayChoices.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.textContent = c;
+    btn.onclick = () => selectChoice3(btn, c, q);
+    if (answered3[cur3]) {
+      btn.classList.add('disabled');
+      if (c === q.answer) btn.classList.add('correct');
+    }
+    choicesEl.appendChild(btn);
+  });
+
+  const exp = document.getElementById('q3Exp');
+  exp.className = 'explanation' + (answered3[cur3] ? ' show' : '');
+  exp.innerHTML = `<strong>💡 Explanation:</strong> ${q.exp}`;
+
+  document.getElementById('prev3Btn').disabled = cur3 === 0;
+  document.getElementById('next3Btn').disabled = !answered3[cur3];
+  document.getElementById('next3Btn').textContent = (cur3 === activeQ3.length-1 && answered3[cur3]) ? 'Finish ✓' : 'Next →';
+}
+
+function selectChoice3(btn, choice, q) {
+  if (answered3[cur3]) return;
+  answered3[cur3] = true;
+  const ok = choice === q.answer;
+  if (ok) score3++;
+  btn.classList.add(ok ? 'correct' : 'wrong');
+  if (!ok) document.querySelectorAll('#q3Choices .choice').forEach(b => { if (b.textContent === q.answer) b.classList.add('correct'); });
+  document.querySelectorAll('#q3Choices .choice').forEach(b => b.classList.add('disabled'));
+  document.getElementById('q3Exp').classList.add('show');
+  document.getElementById('q3Score').textContent = `Score: ${score3}`;
+  document.getElementById('next3Btn').disabled = false;
+  if (cur3 === activeQ3.length-1) document.getElementById('next3Btn').textContent = 'Finish ✓';
+}
+
+function nextQ3() { if (cur3 === activeQ3.length-1) { showFinalScore3(); return; } cur3++; renderQ3(); }
+function prevQ3() { if (cur3 > 0) { cur3--; renderQ3(); } }
+
+function showFinalScore3() {
+  document.getElementById('q3Container').style.display = 'none';
+  document.getElementById('scoreBox3').classList.add('show');
+  document.getElementById('finalScore3').textContent = `${score3}/${activeQ3.length}`;
+  const pct = Math.round((score3/activeQ3.length)*100);
+  document.getElementById('scoreMsg3').textContent =
+    pct >= 90 ? '🏆 Outstanding! You can read and write R code cold!' :
+    pct >= 75 ? '👍 Great work! Review the code patterns you missed.' :
+    pct >= 60 ? '📚 Getting there — practice the fill-in-the-blank scripts.' :
+                '💪 Keep going — trace through each code block step by step.';
+}
+
+function restartQuiz3(doShuffle) {
+  if (typeof doShuffle === 'boolean') shuffleOn3 = doShuffle;
+  activeQ3 = shuffleOn3 ? shuffle(questions3) : [...questions3];
+  cur3 = 0; score3 = 0;
+  answered3 = new Array(activeQ3.length).fill(false);
+  const btn = document.getElementById('shuffleBtn3');
+  btn.textContent = shuffleOn3 ? '🔀 Shuffle: ON' : '🔀 Shuffle: OFF';
+  btn.classList.toggle('on', shuffleOn3);
+  document.getElementById('q3Container').style.display = 'block';
+  document.getElementById('scoreBox3').classList.remove('show');
+  renderQ3();
+}
+
+renderQ3();
+
 document.querySelectorAll('.quick-table').forEach(table => {
   if (!table.parentElement.classList.contains('tbl-scroll')) {
     const wrapper = document.createElement('div');
