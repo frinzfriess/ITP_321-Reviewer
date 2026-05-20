@@ -486,6 +486,30 @@ section-divider {
   margin: clamp(12px, 3vw, 20px) 0 clamp(8px, 2vw, 12px);
 }
 
+.shuffle-btn {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text2);
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(11px, 2.8vw, 12px);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  min-height: 36px;
+  -webkit-tap-highlight-color: transparent;
+}
+.shuffle-btn:active { border-color: var(--accent2); color: var(--accent2); }
+@media (hover: hover) { .shuffle-btn:hover { border-color: var(--accent2); color: var(--accent2); } }
+.shuffle-btn.on {
+  background: #162417;
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+
 /* ── MOBILE-SPECIFIC ── */
 @media (max-width: 480px) {
   .card-grid {
@@ -1454,7 +1478,10 @@ data<span class="kw">$</span>column_name                    <span class="cm"># a
         <span id="qCounter">Question 1 of 43</span>
         <span id="qScore">Score: 0</span>
       </div>
-      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:2%"></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px;flex-wrap:wrap;">
+        <div class="progress-bar" style="flex:1;margin-bottom:0"><div class="progress-fill" id="progressFill" style="width:2%"></div></div>
+        <button class="shuffle-btn" id="shuffleBtn" onclick="toggleShuffle1()">🔀 Shuffle: OFF</button>
+      </div>
 
       <div class="q-card" id="qCard">
         <div class="q-num" id="qNum">Q1</div>
@@ -1474,7 +1501,10 @@ data<span class="kw">$</span>column_name                    <span class="cm"># a
       <div class="score-num" id="finalScore">0/43</div>
       <div class="score-label">Questions Answered Correctly</div>
       <div class="score-msg" id="scoreMsg"></div>
-      <button class="btn primary" style="margin-top:24px" onclick="restartQuiz()">Restart Quiz 1</button>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap;">
+        <button class="btn primary" onclick="restartQuiz(false)">🔁 Restart In Order</button>
+        <button class="btn primary" onclick="restartQuiz(true)">🔀 Restart Shuffled</button>
+      </div>
     </div>
   </div>
 
@@ -1495,7 +1525,10 @@ data<span class="kw">$</span>column_name                    <span class="cm"># a
         <span id="q2Counter">Question 1 of 30</span>
         <span id="q2Score">Score: 0</span>
       </div>
-      <div class="progress-bar"><div class="progress-fill" id="progressFill2" style="width:3%"></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px;flex-wrap:wrap;">
+        <div class="progress-bar" style="flex:1;margin-bottom:0"><div class="progress-fill" id="progressFill2" style="width:3%"></div></div>
+        <button class="shuffle-btn" id="shuffleBtn2" onclick="toggleShuffle2()">🔀 Shuffle: OFF</button>
+      </div>
 
       <div class="q-card" id="q2Card">
         <div class="q-num" id="q2Num">Q1</div>
@@ -1515,7 +1548,10 @@ data<span class="kw">$</span>column_name                    <span class="cm"># a
       <div class="score-num" id="finalScore2">0/30</div>
       <div class="score-label">Questions Answered Correctly</div>
       <div class="score-msg" id="scoreMsg2"></div>
-      <button class="btn primary" style="margin-top:24px" onclick="restartQuiz2()">Restart Quiz 2</button>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap;">
+        <button class="btn primary" onclick="restartQuiz2(false)">🔁 Restart In Order</button>
+        <button class="btn primary" onclick="restartQuiz2(true)">🔀 Restart Shuffled</button>
+      </div>
     </div>
   </div>
 
@@ -1591,18 +1627,37 @@ const questions = [
   { n:43, topic:'CSV', color:'bg-green', text:'Complete: sal <- max(data___salary); ___ <- subset(data, salary == max(salary)); print(rval)', choices:['$, rval','%, rval','^, rval','$, sal'], answer:'$, rval', exp:'data$salary accesses the column. rval stores the filtered subset and is what gets printed.' },
 ];
 
-// ── QUIZ STATE ──
+// ── QUIZ 1 STATE ──
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 let current = 0;
 let score = 0;
+let shuffleOn1 = false;
+let activeQ1 = [...questions];
 let answered = new Array(questions.length).fill(false);
 let scores = new Array(questions.length).fill(false);
 
+function toggleShuffle1() {
+  shuffleOn1 = !shuffleOn1;
+  const btn = document.getElementById('shuffleBtn');
+  btn.textContent = shuffleOn1 ? '🔀 Shuffle: ON' : '🔀 Shuffle: OFF';
+  btn.classList.toggle('on', shuffleOn1);
+  restartQuiz(shuffleOn1);
+}
+
 function renderQ() {
-  const q = questions[current];
+  const q = activeQ1[current];
   document.getElementById('qNum').textContent = `Q${q.n}`;
-  document.getElementById('qCounter').textContent = `Question ${current+1} of ${questions.length}`;
+  document.getElementById('qCounter').textContent = `Question ${current+1} of ${activeQ1.length}`;
   document.getElementById('qScore').textContent = `Score: ${score}`;
-  document.getElementById('progressFill').style.width = `${((current+1)/questions.length)*100}%`;
+  document.getElementById('progressFill').style.width = `${((current+1)/activeQ1.length)*100}%`;
 
   const tag = document.getElementById('qTopicTag');
   tag.className = `q-topic-tag ${q.color}`;
@@ -1610,9 +1665,12 @@ function renderQ() {
 
   document.getElementById('qText').textContent = q.text;
 
+  // Shuffle the answer choices too when shuffle is on
+  const displayChoices = shuffleOn1 ? shuffle(q.choices) : q.choices;
+
   const choicesEl = document.getElementById('qChoices');
   choicesEl.innerHTML = '';
-  q.choices.forEach(c => {
+  displayChoices.forEach(c => {
     const btn = document.createElement('button');
     btn.className = 'choice';
     btn.textContent = c;
@@ -1630,7 +1688,7 @@ function renderQ() {
 
   document.getElementById('prevBtn').disabled = current === 0;
   document.getElementById('nextBtn').disabled = !answered[current];
-  if (current === questions.length - 1 && answered[current]) {
+  if (current === activeQ1.length - 1 && answered[current]) {
     document.getElementById('nextBtn').textContent = 'Finish ✓';
   } else {
     document.getElementById('nextBtn').textContent = 'Next →';
@@ -1643,23 +1701,20 @@ function selectChoice(btn, choice, q) {
   const isCorrect = choice === q.answer;
   if (isCorrect) { score++; scores[current] = true; }
   btn.classList.add(isCorrect ? 'correct' : 'wrong');
-  // Mark correct if wrong chosen
   if (!isCorrect) {
-    document.querySelectorAll('.choice').forEach(b => {
+    document.querySelectorAll('#qChoices .choice').forEach(b => {
       if (b.textContent === q.answer) b.classList.add('correct');
     });
   }
-  document.querySelectorAll('.choice').forEach(b => b.classList.add('disabled'));
+  document.querySelectorAll('#qChoices .choice').forEach(b => b.classList.add('disabled'));
   document.getElementById('qExp').classList.add('show');
   document.getElementById('qScore').textContent = `Score: ${score}`;
   document.getElementById('nextBtn').disabled = false;
-  if (current === questions.length - 1) document.getElementById('nextBtn').textContent = 'Finish ✓';
+  if (current === activeQ1.length - 1) document.getElementById('nextBtn').textContent = 'Finish ✓';
 }
 
 function nextQ() {
-  if (current === questions.length - 1) {
-    showFinalScore(); return;
-  }
+  if (current === activeQ1.length - 1) { showFinalScore(); return; }
   current++;
   renderQ();
 }
@@ -1672,8 +1727,8 @@ function showFinalScore() {
   document.getElementById('quizContainer').style.display = 'none';
   const box = document.getElementById('scoreBox');
   box.classList.add('show');
-  document.getElementById('finalScore').textContent = `${score}/${questions.length}`;
-  const pct = Math.round((score/questions.length)*100);
+  document.getElementById('finalScore').textContent = `${score}/${activeQ1.length}`;
+  const pct = Math.round((score/activeQ1.length)*100);
   let msg = pct >= 90 ? '🏆 Excellent! You\'re ready for the exam!' :
             pct >= 75 ? '👍 Good job! Review the ones you missed.' :
             pct >= 60 ? '📚 Keep studying — you\'re getting there!' :
@@ -1681,10 +1736,15 @@ function showFinalScore() {
   document.getElementById('scoreMsg').textContent = msg;
 }
 
-function restartQuiz() {
+function restartQuiz(doShuffle) {
+  if (typeof doShuffle === 'boolean') shuffleOn1 = doShuffle;
+  activeQ1 = shuffleOn1 ? shuffle(questions) : [...questions];
   current = 0; score = 0;
-  answered = new Array(questions.length).fill(false);
-  scores = new Array(questions.length).fill(false);
+  answered = new Array(activeQ1.length).fill(false);
+  scores = new Array(activeQ1.length).fill(false);
+  const btn = document.getElementById('shuffleBtn');
+  btn.textContent = shuffleOn1 ? '🔀 Shuffle: ON' : '🔀 Shuffle: OFF';
+  btn.classList.toggle('on', shuffleOn1);
   document.getElementById('quizContainer').style.display = 'block';
   document.getElementById('scoreBox').classList.remove('show');
   renderQ();
@@ -1757,14 +1817,24 @@ const questions2 = [
 // ── QUIZ 2 STATE ──
 let cur2 = 0;
 let score2 = 0;
+let shuffleOn2 = false;
+let activeQ2 = [...questions2];
 let answered2 = new Array(questions2.length).fill(false);
 
+function toggleShuffle2() {
+  shuffleOn2 = !shuffleOn2;
+  const btn = document.getElementById('shuffleBtn2');
+  btn.textContent = shuffleOn2 ? '🔀 Shuffle: ON' : '🔀 Shuffle: OFF';
+  btn.classList.toggle('on', shuffleOn2);
+  restartQuiz2(shuffleOn2);
+}
+
 function renderQ2() {
-  const q = questions2[cur2];
+  const q = activeQ2[cur2];
   document.getElementById('q2Num').textContent = `Q${q.n}`;
-  document.getElementById('q2Counter').textContent = `Question ${cur2+1} of ${questions2.length}`;
+  document.getElementById('q2Counter').textContent = `Question ${cur2+1} of ${activeQ2.length}`;
   document.getElementById('q2Score').textContent = `Score: ${score2}`;
-  document.getElementById('progressFill2').style.width = `${((cur2+1)/questions2.length)*100}%`;
+  document.getElementById('progressFill2').style.width = `${((cur2+1)/activeQ2.length)*100}%`;
 
   const tag = document.getElementById('q2TopicTag');
   tag.className = `q-topic-tag ${q.color}`;
@@ -1772,9 +1842,12 @@ function renderQ2() {
 
   document.getElementById('q2Text').textContent = q.text;
 
+  // Shuffle answer choices too when shuffle is on
+  const displayChoices2 = shuffleOn2 ? shuffle(q.choices) : q.choices;
+
   const choicesEl = document.getElementById('q2Choices');
   choicesEl.innerHTML = '';
-  q.choices.forEach(c => {
+  displayChoices2.forEach(c => {
     const btn = document.createElement('button');
     btn.className = 'choice';
     btn.textContent = c;
@@ -1792,7 +1865,7 @@ function renderQ2() {
 
   document.getElementById('prev2Btn').disabled = cur2 === 0;
   document.getElementById('next2Btn').disabled = !answered2[cur2];
-  if (cur2 === questions2.length - 1 && answered2[cur2]) {
+  if (cur2 === activeQ2.length - 1 && answered2[cur2]) {
     document.getElementById('next2Btn').textContent = 'Finish ✓';
   } else {
     document.getElementById('next2Btn').textContent = 'Next →';
@@ -1814,11 +1887,11 @@ function selectChoice2(btn, choice, q) {
   document.getElementById('q2Exp').classList.add('show');
   document.getElementById('q2Score').textContent = `Score: ${score2}`;
   document.getElementById('next2Btn').disabled = false;
-  if (cur2 === questions2.length - 1) document.getElementById('next2Btn').textContent = 'Finish ✓';
+  if (cur2 === activeQ2.length - 1) document.getElementById('next2Btn').textContent = 'Finish ✓';
 }
 
 function nextQ2() {
-  if (cur2 === questions2.length - 1) { showFinalScore2(); return; }
+  if (cur2 === activeQ2.length - 1) { showFinalScore2(); return; }
   cur2++;
   renderQ2();
 }
@@ -1831,8 +1904,8 @@ function showFinalScore2() {
   document.getElementById('q2Container').style.display = 'none';
   const box = document.getElementById('scoreBox2');
   box.classList.add('show');
-  document.getElementById('finalScore2').textContent = `${score2}/${questions2.length}`;
-  const pct = Math.round((score2/questions2.length)*100);
+  document.getElementById('finalScore2').textContent = `${score2}/${activeQ2.length}`;
+  const pct = Math.round((score2/activeQ2.length)*100);
   let msg = pct >= 90 ? '🏆 Excellent! You know the new topics cold!' :
             pct >= 75 ? '👍 Good job! Review the ones you missed.' :
             pct >= 60 ? '📚 Getting there — check the Data Viz and ggplot2 tabs.' :
@@ -1840,9 +1913,14 @@ function showFinalScore2() {
   document.getElementById('scoreMsg2').textContent = msg;
 }
 
-function restartQuiz2() {
+function restartQuiz2(doShuffle) {
+  if (typeof doShuffle === 'boolean') shuffleOn2 = doShuffle;
+  activeQ2 = shuffleOn2 ? shuffle(questions2) : [...questions2];
   cur2 = 0; score2 = 0;
-  answered2 = new Array(questions2.length).fill(false);
+  answered2 = new Array(activeQ2.length).fill(false);
+  const btn = document.getElementById('shuffleBtn2');
+  btn.textContent = shuffleOn2 ? '🔀 Shuffle: ON' : '🔀 Shuffle: OFF';
+  btn.classList.toggle('on', shuffleOn2);
   document.getElementById('q2Container').style.display = 'block';
   document.getElementById('scoreBox2').classList.remove('show');
   renderQ2();
