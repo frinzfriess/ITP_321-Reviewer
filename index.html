@@ -40,7 +40,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── HEADER ── */
+/* -- HEADER -- */
 header {
   background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1a2e 100%);
   border-bottom: 1px solid var(--border);
@@ -83,7 +83,7 @@ h1 span { color: var(--accent); }
   font-weight: 300;
 }
 
-/* ── NAV TABS ── */
+/* -- NAV TABS -- */
 .tabs {
   display: flex;
   gap: 6px;
@@ -121,7 +121,7 @@ h1 span { color: var(--accent); }
   border-color: var(--border);
 }
 
-/* ── MAIN LAYOUT ── */
+/* -- MAIN LAYOUT -- */
 .wrapper {
   max-width: 960px;
   margin: 0 auto;
@@ -136,7 +136,7 @@ h1 span { color: var(--accent); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ── TOPIC CARD ── */
+/* -- TOPIC CARD -- */
 .topic-header {
   display: flex;
   align-items: center;
@@ -156,7 +156,7 @@ h1 span { color: var(--accent); }
 .topic-title { font-size: clamp(15px, 4vw, 20px); font-weight: 700; }
 .topic-desc { color: var(--text2); font-size: clamp(11px, 2.5vw, 13px); margin-top: 2px; }
 
-/* ── QUICK REF TABLE ── */
+/* -- QUICK REF TABLE -- */
 .quick-table {
   width: 100%;
   border-collapse: collapse;
@@ -208,7 +208,7 @@ h1 span { color: var(--accent); }
   min-width: 480px;
 }
 
-/* ── CODE BLOCK ── */
+/* -- CODE BLOCK -- */
 .code-block {
   background: var(--surface2);
   border: 1px solid var(--border);
@@ -230,7 +230,7 @@ h1 span { color: var(--accent); }
 .cm { color: #8b949e; font-style: italic; }
 .op { color: #79c0ff; }
 
-/* ── CONCEPT CARDS ── */
+/* -- CONCEPT CARDS -- */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
@@ -262,7 +262,7 @@ h1 span { color: var(--accent); }
 .card-title { font-size: clamp(13px, 3.2vw, 15px); font-weight: 600; margin-bottom: 6px; }
 .card-body { font-size: clamp(11px, 2.8vw, 13px); color: var(--text2); line-height: 1.6; }
 
-/* ── TRAP CARDS ── */
+/* -- TRAP CARDS -- */
 .trap {
   background: #1e1010;
   border: 1px solid #3d1a1a;
@@ -276,7 +276,7 @@ h1 span { color: var(--accent); }
 }
 .trap strong { color: var(--accent5); }
 
-/* ── QUIZ SECTION ── */
+/* -- QUIZ SECTION -- */
 .quiz-progress {
   display: flex;
   align-items: center;
@@ -419,7 +419,7 @@ h1 span { color: var(--accent); }
 .score-label { color: var(--text2); font-size: clamp(12px, 3vw, 14px); margin-top: 6px; }
 .score-msg { font-size: clamp(14px, 4vw, 18px); font-weight: 600; margin-top: 16px; }
 
-/* ── ANSWER KEY ── */
+/* -- ANSWER KEY -- */
 .answer-key {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr));
@@ -510,7 +510,7 @@ section-divider {
   color: var(--accent2);
 }
 
-/* ── MOBILE-SPECIFIC ── */
+/* -- MOBILE-SPECIFIC -- */
 @media (max-width: 480px) {
   .card-grid {
     grid-template-columns: 1fr;
@@ -531,7 +531,7 @@ section-divider {
   }
 }
 
-/* ── TABLET ── */
+/* -- TABLET -- */
 @media (min-width: 481px) and (max-width: 768px) {
   .card-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -541,7 +541,7 @@ section-divider {
   }
 }
 
-/* ── SAFE AREAS for iPhone notch/home bar ── */
+/* -- SAFE AREAS for iPhone notch/home bar -- */
 @supports (padding: max(0px)) {
   .wrapper {
     padding-left: max(clamp(12px, 4vw, 24px), env(safe-area-inset-left));
@@ -578,6 +578,7 @@ section-divider {
     <button class="tab" onclick="showSection('quiz')">🧠 Quiz 1</button>
     <button class="tab" onclick="showSection('quiz2')">🧠 Quiz 2</button>
     <button class="tab" onclick="showSection('quiz3')">🧩 Quiz 3</button>
+    <button class="tab" onclick="showSection('quiz4')">🎲 Quiz 4</button>
     <button class="tab" onclick="showSection('answers')">✅ Answer Key</button>
   </div>
 
@@ -1608,6 +1609,67 @@ data<span class="kw">$</span>column_name                    <span class="cm"># a
   </div>
 
   <!-- ═══════════════════════════════════════════════
+       QUIZ 4 — RANDOM MIX
+  ════════════════════════════════════════════════ -->
+  <div class="section" id="quiz4">
+    <div class="topic-header">
+      <div class="topic-icon" style="background:#1a1a2e">🎲</div>
+      <div>
+        <div class="topic-title" style="color:#e879f9">Quiz 4 — Random Mixed Quiz</div>
+        <div class="topic-desc">All topics · All types · Different every time · 20 questions per round</div>
+      </div>
+    </div>
+
+    <div class="info-box" style="background:#1a0e2e;border-color:#4a1e7a;border-left:3px solid #e879f9">
+      <h4 style="color:#e879f9">🎲 How Quiz 4 works</h4>
+      Every round picks <strong>20 random questions</strong> from a master pool of 80+ covering all topics and all question types — true/false, multiple choice, enumeration, know the result, and fill-in-the-blank. Each restart gives you a completely different set. Choices are always shuffled too.
+    </div>
+
+    <div id="q4StartScreen">
+      <div style="text-align:center;padding:20px 0 10px;">
+        <div style="font-size:clamp(40px,10vw,60px);margin-bottom:12px">🎲</div>
+        <div style="font-size:clamp(15px,4vw,20px);font-weight:700;color:var(--text);margin-bottom:8px">Ready for a random challenge?</div>
+        <div style="font-size:clamp(12px,3vw,14px);color:var(--text2);margin-bottom:28px">20 questions · All topics · All types · Always different</div>
+        <button class="btn primary" style="background:#9333ea;border-color:#9333ea;color:#fff;font-size:16px;padding:14px 32px;border-radius:12px" onclick="startQuiz4()">🎲 Start Random Quiz</button>
+      </div>
+    </div>
+
+    <div id="q4Container" style="display:none">
+      <div class="quiz-progress">
+        <span id="q4Counter">Question 1 of 20</span>
+        <span id="q4Score">Score: 0</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill4" style="width:5%;background:linear-gradient(90deg,#9333ea,#e879f9)"></div></div>
+
+      <div class="q-card" id="q4Card" style="border-color:#2a1a4a">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+          <div class="q-num" id="q4Num" style="margin-bottom:0">Q1</div>
+          <div id="q4TypeTag"></div>
+          <div id="q4TopicTag"></div>
+        </div>
+        <div class="q-text" id="q4Text"></div>
+        <div id="q4CodeBlock" class="code-block" style="display:none;border-left-color:#9333ea"></div>
+        <div class="choices" id="q4Choices"></div>
+        <div class="explanation" id="q4Exp"></div>
+      </div>
+
+      <div class="q-nav">
+        <button class="btn" id="prev4Btn" onclick="prevQ4()" disabled>← Prev</button>
+        <button class="btn primary" id="next4Btn" onclick="nextQ4()" disabled style="background:#9333ea;border-color:#9333ea">Next →</button>
+      </div>
+    </div>
+
+    <div class="score-box" id="scoreBox4" style="display:none">
+      <div style="font-size:clamp(36px,10vw,52px);margin-bottom:8px">🎲</div>
+      <div class="score-num" id="finalScore4" style="color:#e879f9">0/20</div>
+      <div class="score-label">Questions Answered Correctly</div>
+      <div class="score-msg" id="scoreMsg4" style="margin-top:12px"></div>
+      <div id="q4MissedList" style="margin-top:20px;text-align:left"></div>
+      <button class="btn primary" style="margin-top:24px;background:#9333ea;border-color:#9333ea;color:#fff" onclick="startQuiz4()">🎲 New Random Round</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
        ANSWER KEY
   ════════════════════════════════════════════════ -->
   <div class="section" id="answers">
@@ -1624,7 +1686,7 @@ data<span class="kw">$</span>column_name                    <span class="cm"># a
 </div><!-- /wrapper -->
 
 <script>
-// ── TAB NAVIGATION ──
+// -- TAB NAVIGATION--
 function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -1632,7 +1694,7 @@ function showSection(id) {
   event.target.classList.add('active');
 }
 
-// ── QUIZ DATA ──
+// -- QUIZ DATA--
 const questions = [
   { n:1, topic:'CSV', color:'bg-green', text:'A CSV file can be opened in an Excel Workbook.', choices:['true','false'], answer:'true', exp:'CSV files are plain-text table files. Excel can open them as worksheets.' },
   { n:2, topic:'XML', color:'bg-orange', text:'Complete XML script: library("___"), xmlParse(), store xmlRoot(result) in ___, then print(___[1])', choices:['xml, rootnode, rootnode','xml, parse, rootnode','XLconnect, result, rootnode','xml, rootnode, result'], answer:'xml, parse, rootnode', exp:'Use library("XML"), xmlParse() to parse, store xmlRoot(result) in rootnode, print(rootnode[1]).' },
@@ -1679,7 +1741,7 @@ const questions = [
   { n:43, topic:'CSV', color:'bg-green', text:'Complete: sal <- max(data___salary); ___ <- subset(data, salary == max(salary)); print(rval)', choices:['$, rval','%, rval','^, rval','$, sal'], answer:'$, rval', exp:'data$salary accesses the column. rval stores the filtered subset and is what gets printed.' },
 ];
 
-// ── QUIZ 1 STATE ──
+// -- QUIZ 1 STATE--
 function shuffle(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -1802,7 +1864,7 @@ function restartQuiz(doShuffle) {
   renderQ();
 }
 
-// ── ANSWER KEY ──
+// -- ANSWER KEY--
 const answerKeyData = [
   {n:1,a:'true'},{n:2,a:'xml, parse, rootnode, 1'},{n:3,a:'true'},{n:4,a:'2014-01-01, 2014-01-02'},
   {n:5,a:'extensible markup language'},{n:6,a:'xml'},{n:7,a:'false'},{n:8,a:'getwd()'},
@@ -1825,7 +1887,7 @@ answerKeyData.forEach(item => {
   grid.appendChild(el);
 });
 
-// ── QUIZ 2 DATA — New Topics ──
+// -- QUIZ 2 DATA — New Topics--
 const questions2 = [
   // DEFINITIONS
   { n:1, topic:'Data Science', color:'bg-blue', text:'Data Science is a discipline that turns raw data into:', choices:['understanding, insight, and knowledge','charts, graphs, and tables','scripts, loops, and functions','CSV, XML, and Excel files'], answer:'understanding, insight, and knowledge', exp:'Data Science uses tools, algorithms, and ML principles to discover hidden patterns and turn raw data into understanding, insight, and knowledge.' },
@@ -1866,7 +1928,7 @@ const questions2 = [
   { n:30, topic:'XML', color:'bg-orange', text:'Which function converts an XML file directly into a data frame in R?', choices:['xmlToDataFrame()','xmlParse()','xmlRoot()','as.data.frame(xml)'], answer:'xmlToDataFrame()', exp:'xmlToDataFrame("record.xml") reads and converts the XML file directly into an R data frame in one step.' },
 ];
 
-// ── QUIZ 2 STATE ──
+// -- QUIZ 2 STATE--
 let cur2 = 0;
 let score2 = 0;
 let shuffleOn2 = false;
@@ -1982,7 +2044,7 @@ function restartQuiz2(doShuffle) {
 renderQ();
 renderQ2();
 
-// ── QUIZ 3 DATA — Enumerations, Results, Fill-in-the-Blanks ──
+// -- QUIZ 3 DATA — Enumerations, Results, Fill-in-the-Blanks--
 const questions3 = [
   // ENUMERATION
   { n:1, type:'enum', topic:'Packages', color:'bg-green', text:'Which of the following are ALL Excel-related packages in R?', code:null, choices:['xlsx, XLConnect, gdata, readxl','xlsx, XLConnect, grepl, readxl','xlsx, XML, gdata, readxl','xlsx, XLConnect, gdata, xmlParse'], answer:'xlsx, XLConnect, gdata, readxl', exp:'The four Excel packages covered are: xlsx, XLConnect, gdata, and readxl. grepl is for pattern matching; XML and xmlParse are for XML files.' },
@@ -2021,7 +2083,7 @@ const questions3 = [
   { n:30, type:'blank', topic:'ggplot2', color:'bg-purple', text:'Fill in the blank — add a red line connecting the BOD points:', code:'ggplot(data=BOD, mapping=aes(x=Time, y=demand)) +\n  geom_point(size = 5) +\n  ___(color = "red")', choices:['geom_line()','geom_smooth()','geom_bar()','geom_point()'], answer:'geom_line()', exp:'geom_line() draws lines connecting points. geom_point() was already used for the dots; geom_line(color="red") adds the red connecting line.' },
 ];
 
-// ── QUIZ 3 STATE ──
+// -- QUIZ 3 STATE--
 let cur3 = 0, score3 = 0, shuffleOn3 = false;
 let activeQ3 = [...questions3];
 let answered3 = new Array(questions3.length).fill(false);
@@ -2129,6 +2191,241 @@ function restartQuiz3(doShuffle) {
 }
 
 renderQ3();
+
+// ═══════════════════════════════════════════════════════════
+// QUIZ 4 — MASTER POOL (80+ questions, picks 20 each round)
+// Types: 'mc'=multiple choice, 'tf'=true/false, 'enum', 'result', 'blank'
+// ═══════════════════════════════════════════════════════════
+const masterPool = [
+  // -- CSV--------------------------------------------------
+  {type:'tf',    topic:'CSV',        color:'bg-green',  text:'A CSV file can be opened in Microsoft Excel.',                                                                                    code:null, choices:['True','False'],                                                                                                                           answer:'True',         exp:'CSV is plain text — Excel can open .csv files as worksheets.'},
+  {type:'tf',    topic:'CSV',        color:'bg-green',  text:'write.csv() is used to READ a CSV file into R.',                                                                                  code:null, choices:['False','True'],                                                                                                                           answer:'False',        exp:'write.csv() WRITES/creates a file. read.csv() reads it.'},
+  {type:'tf',    topic:'CSV',        color:'bg-green',  text:'We can create a CSV file using Notepad.',                                                                                         code:null, choices:['True','False'],                                                                                                                           answer:'True',         exp:'CSV files are plain text and can be typed in any text editor, including Notepad.'},
+  {type:'mc',    topic:'CSV',        color:'bg-green',  text:'What symbol accesses a column in a data frame?',                                                                                  code:null, choices:['$','@','#','&'],                                                                                                                         answer:'$',            exp:'data$column_name — the dollar sign accesses a specific column in a data frame.'},
+  {type:'mc',    topic:'CSV',        color:'bg-green',  text:'CSV stands for:',                                                                                                                 code:null, choices:['Comma Separated Values','Console Stated Values','Comma Stated Values','Console Separated Values'],                                        answer:'Comma Separated Values', exp:'CSV = Comma Separated Values — values in a row separated by commas.'},
+  {type:'mc',    topic:'CSV',        color:'bg-green',  text:'Which function reads a CSV file in R?',                                                                                           code:null, choices:['read.csv()','write.csv()','load.csv()','import.csv()'],                                                                                  answer:'read.csv()',   exp:'read.csv("file.csv") reads the file and returns it as a data frame.'},
+  {type:'mc',    topic:'CSV',        color:'bg-green',  text:'What is the file extension for CSV files?',                                                                                       code:null, choices:['.csv','.csm','.csvx','.xls'],                                                                                                            answer:'.csv',         exp:'Comma Separated Values files use the .csv extension.'},
+  {type:'tf',    topic:'CSV',        color:'bg-green',  text:'R can read and write data from files stored outside the R environment.',                                                          code:null, choices:['True','False'],                                                                                                                           answer:'True',         exp:'R can read/write external files like CSV, XML, and Excel using functions like read.csv() and write.csv().'},
+  {type:'blank', topic:'CSV',        color:'bg-green',  text:'Fill in the blank — assign CSV data to a variable:',                                                                              code:'data ___ read.csv("employee.csv")',                         choices:['<-','==','->','='],                                                                 answer:'<-',           exp:'<- is the R assignment operator. It assigns the result of read.csv() to "data".'},
+  {type:'blank', topic:'CSV',        color:'bg-green',  text:'Fill in the blank — filter the row with the maximum salary:',                                                                     code:'retval <- subset(data, salary ___ max(salary))',           choices:['==','=','>=','!='],                                                                 answer:'==',           exp:'Use == for comparison inside subset(). Single = is for assignment or named arguments only.'},
+  {type:'blank', topic:'CSV',        color:'bg-green',  text:'Fill in the blank — write CSV without extra row numbers:',                                                                        code:'write.csv(retval, file="output.csv", row.names=___)',      choices:['FALSE','TRUE','NULL','0'],                                                          answer:'FALSE',        exp:'row.names=FALSE stops write.csv() from adding an extra row-number column to the output.'},
+  {type:'result',topic:'CSV',        color:'bg-green',  text:'What does this return?',                                                                                                          code:'data <- read.csv("employee.csv")\nprint(is.data.frame(data))', choices:['TRUE','FALSE','NULL','An error'],                                             answer:'TRUE',         exp:'read.csv() always returns a data frame, so is.data.frame() returns TRUE.'},
+  {type:'result',topic:'CSV',        color:'bg-green',  text:'What does subset() return here?',                                                                                                 code:'subset(data, salary == max(salary))',                       choices:['The row(s) with the highest salary','All rows sorted by salary','The max salary number','An error'], answer:'The row(s) with the highest salary', exp:'subset filters rows where salary equals the maximum — returns the top-earning row(s).'},
+  {type:'mc',    topic:'CSV',        color:'bg-green',  text:'Which dates do NOT belong in: subset(data, as.Date(start_date) > as.Date("2014-01-06"))?',                                       code:null, choices:['2014-01-01 and 2014-01-02','2014-01-09 and 2015-01-09','2015-01-09 and 2016-09-09','2014-05-03 and 2016-09-09'],                        answer:'2014-01-01 and 2014-01-02', exp:'The condition keeps dates AFTER Jan 6, 2014. Jan 1 and Jan 2 are before that cutoff.'},
+  {type:'mc',    topic:'CSV',        color:'bg-green',  text:'Which operator means "on or after" when filtering dates?',                                                                         code:null, choices:['>=','>','<=','=='],                                                                                                                       answer:'>=',           exp:'> means "after". >= means "on or after". If the question says on or after a date, use >=.'},
+
+  // -- XML--------------------------------------------------
+  {type:'mc',    topic:'XML',        color:'bg-orange', text:'XML stands for:',                                                                                                                 code:null, choices:['Extensible Markup Language','Extended Markup Language','Extensive Markup Language','Executable Markup Language'],                         answer:'Extensible Markup Language', exp:'XML = Extensible Markup Language — "extensible" means it can be extended with custom tags.'},
+  {type:'tf',    topic:'XML',        color:'bg-orange', text:'An XML file can be converted into a Data Frame in R.',                                                                             code:null, choices:['True','False'],                                                                                                                           answer:'True',         exp:'xmlToDataFrame("record.xml") converts an XML file directly into an R data frame.'},
+  {type:'mc',    topic:'XML',        color:'bg-orange', text:'Which function parses (reads) an XML file in R?',                                                                                  code:null, choices:['xmlParse()','xmlRead()','xmlLoad()','xmlOpen()'],                                                                                         answer:'xmlParse()',   exp:'xmlParse(file="record.xml") reads and parses an XML file.'},
+  {type:'mc',    topic:'XML',        color:'bg-orange', text:'Which function gets the top-level (root) node of a parsed XML?',                                                                   code:null, choices:['xmlRoot()','xmlTop()','xmlParent()','xmlBase()'],                                                                                         answer:'xmlRoot()',    exp:'xmlRoot(result) extracts the root/top-level node from the parsed XML object.'},
+  {type:'mc',    topic:'XML',        color:'bg-orange', text:'Which function counts the number of nodes inside an XML root?',                                                                    code:null, choices:['xmlSize()','xmlCount()','xmlLength()','xmlNodes()'],                                                                                      answer:'xmlSize()',    exp:'xmlSize(rootnode) returns the total number of child nodes inside the root element.'},
+  {type:'mc',    topic:'XML',        color:'bg-orange', text:'Which function converts XML directly to a data frame?',                                                                            code:null, choices:['xmlToDataFrame()','xmlParse()','xmlRoot()','xmlConvert()'],                                                                               answer:'xmlToDataFrame()', exp:'xmlToDataFrame("record.xml") reads and converts the XML file into an R data frame in one step.'},
+  {type:'blank', topic:'XML',        color:'bg-orange', text:'Fill in the blank — count the XML child nodes:',                                                                                  code:'rootnode <- xmlRoot(result)\nrootsize <- ___(rootnode)',    choices:['xmlSize','xmlCount','xmlLength','xmlRoot'],                                         answer:'xmlSize',      exp:'xmlSize(rootnode) returns the number of child nodes inside the root.'},
+  {type:'result',topic:'XML',        color:'bg-orange', text:'What does xmlSize() return here?',                                                                                                code:'result <- xmlParse(file="record.xml")\nrootnode <- xmlRoot(result)\nxmlSize(rootnode)', choices:['The number of child nodes in the root','The root node text','TRUE','The full XML document'], answer:'The number of child nodes in the root', exp:'xmlSize(rootnode) counts child nodes inside the XML root element.'},
+  {type:'mc',    topic:'XML',        color:'bg-orange', text:'Which package must be loaded to use xmlParse() in R?',                                                                             code:null, choices:['XML','readxl','xlsx','tidyverse'],                                                                                                        answer:'XML',          exp:'library("XML") loads the XML package. Also load library("methods") for full compatibility.'},
+
+  // -- WORKING DIRECTORY------------------------------------
+  {type:'mc',    topic:'Working Dir',color:'bg-blue',   text:'Which function shows the current working directory in R?',                                                                         code:null, choices:['getwd()','setwd()','pwd()','dir()'],                                                                                                      answer:'getwd()',      exp:'getwd() = "get working directory". It returns the active folder path.'},
+  {type:'mc',    topic:'Working Dir',color:'bg-blue',   text:'Which function SETS (changes) the working directory in R?',                                                                        code:null, choices:['setwd()','getwd()','chdir()','moveto()'],                                                                                                 answer:'setwd()',      exp:'setwd("C:/path") changes the working directory to the specified folder.'},
+  {type:'tf',    topic:'Working Dir',color:'bg-blue',   text:'The script setwd("C:\\web\\Sample") with single backslash is accepted in R.',                                                     code:null, choices:['False','True'],                                                                                                                           answer:'False',        exp:'Single backslash \\ is an escape character in R strings. Use forward slash: setwd("C:/web/Sample").'},
+  {type:'tf',    topic:'Working Dir',color:'bg-blue',   text:'The path C:/MyDocuments/folder is an accepted path format in R.',                                                                  code:null, choices:['True','False'],                                                                                                                           answer:'True',         exp:'R accepts forward slashes in paths. C:/MyDocuments/folder is valid.'},
+  {type:'blank', topic:'Working Dir',color:'bg-blue',   text:'Fill in the blank — set the working directory:',                                                                                  code:'___(C:/web/Sample)',                                        choices:['setwd','getwd','setdir','chdir'],                                                           answer:'setwd',        exp:'setwd() changes the active working directory. getwd() only reads the current one.'},
+  {type:'mc',    topic:'Working Dir',color:'bg-blue',   text:'In RStudio, imported data frames commonly appear in which tab?',                                                                   code:null, choices:['Environment','Console','Source pane','History'],                                                                                           answer:'Environment',  exp:'The Environment tab in RStudio shows all currently loaded objects including data frames.'},
+
+  // -- FUNCTIONS--------------------------------------------
+  {type:'mc',    topic:'Functions',  color:'bg-purple', text:'A ___ is a set of statements organized to perform a specific task.',                                                               code:null, choices:['function','argument','loop','variable'],                                                                                                   answer:'function',     exp:'A function is a named, reusable block of code organized to perform a specific task.'},
+  {type:'mc',    topic:'Functions',  color:'bg-purple', text:'Which part of a function holds the code that defines what it does?',                                                               code:null, choices:['Function body','Arguments','Function name','Return value'],                                                                                answer:'Function body', exp:'The function body is the code block inside the curly braces { }.'},
+  {type:'mc',    topic:'Functions',  color:'bg-purple', text:'Which part of a function acts as a placeholder/input and is optional?',                                                            code:null, choices:['Arguments','Function body','Function name','Return value'],                                                                                answer:'Arguments',    exp:'Arguments are optional input placeholders. A function can be defined with no arguments.'},
+  {type:'tf',    topic:'Functions',  color:'bg-purple', text:'Return value is optional when creating a function in R.',                                                                          code:null, choices:['True','False'],                                                                                                                           answer:'True',         exp:'R returns the last evaluated expression automatically even without an explicit return() statement.'},
+  {type:'tf',    topic:'Functions',  color:'bg-purple', text:'Functions created by the programmer are called in-built functions.',                                                               code:null, choices:['False','True'],                                                                                                                           answer:'False',        exp:'Functions you create are user-defined. In-built (built-in) functions like print(), max() are already provided by R.'},
+  {type:'mc',    topic:'Functions',  color:'bg-purple', text:'Which type of function can be called directly without defining it first?',                                                         code:null, choices:['Built-in (in-built)','User-defined','Switch function','Loop function'],                                                                   answer:'Built-in (in-built)', exp:'Built-in functions like print(), max(), sum() are already in R — no need to define them first.'},
+  {type:'result',topic:'Functions',  color:'bg-purple', text:'What does this print?',                                                                                                           code:'new.function <- function(a) {\n  for(i in 1:a) {\n    b <- i^2\n    print(b)\n  }\n}\nnew.function(3)', choices:['1  4  9','1  2  3','1  8  27','3  6  9'], answer:'1  4  9', exp:'Loop: i=1→1^2=1, i=2→2^2=4, i=3→3^2=9. Printed: 1, 4, 9.'},
+  {type:'result',topic:'Functions',  color:'bg-purple', text:'What does this return?',                                                                                                           code:'max(c(10, 25, 8, 42, 15))',                                 choices:['42','25','10','15'],                                                                        answer:'42',           exp:'max() returns the largest value. The maximum of 10, 25, 8, 42, 15 is 42.'},
+  {type:'blank', topic:'Functions',  color:'bg-purple', text:'Fill in the blank — complete the function call that squares 1 to 7:',                                                              code:'new.function <- function(a) {\n  for(i in 1:a) {\n    b <- i^2\n    print(b)\n  }\n}\nnew.function(___)', choices:['7','3','a','10'],                  answer:'7',            exp:'new.function(7) passes 7 as the argument a, making the loop run from 1 to 7 and print each square.'},
+
+  // -- LOOPS------------------------------------------------
+  {type:'tf',    topic:'Loops',      color:'bg-green',  text:'A while loop runs as long as its condition is TRUE.',                                                                              code:null, choices:['True','False'],                                                                                                                           answer:'True',         exp:'A while loop checks its condition before each iteration and continues while it remains TRUE.'},
+  {type:'tf',    topic:'Loops',      color:'bg-green',  text:'A while loop runs as long as its condition is FALSE.',                                                                             code:null, choices:['False','True'],                                                                                                                           answer:'False',        exp:'A while loop runs while the condition is TRUE, not false. It stops when the condition becomes FALSE.'},
+  {type:'tf',    topic:'Loops',      color:'bg-orange', text:'A repeat loop has a condition in its header to terminate.',                                                                        code:null, choices:['False','True'],                                                                                                                           answer:'False',        exp:'repeat has NO condition in its header. It needs a break statement inside to stop.'},
+  {type:'mc',    topic:'Loops',      color:'bg-orange', text:'Which statement terminates a repeat loop?',                                                                                       code:null, choices:['break','exit','next','stop'],                                                                                                             answer:'break',        exp:'break immediately exits any loop — for, while, or repeat.'},
+  {type:'tf',    topic:'Loops',      color:'bg-green',  text:'If the condition in a while loop is always TRUE, it becomes an infinite loop.',                                                    code:null, choices:['True','False'],                                                                                                                           answer:'True',         exp:'A condition that never becomes FALSE means the loop never stops — infinite loop.'},
+  {type:'result',topic:'Loops',      color:'bg-green',  text:'What does this code print?',                                                                                                      code:'x <- 1\nwhile (x <= 3) {\n  print(x)\n  x <- x + 1\n}', choices:['1  2  3','1  2  3  4','0  1  2  3','Infinite loop'],                                answer:'1  2  3',      exp:'x starts at 1. Loop prints x then adds 1. When x=4, x<=3 is FALSE. Output: 1, 2, 3.'},
+  {type:'result',topic:'Loops',      color:'bg-orange', text:'What does this print?',                                                                                                           code:'x <- 1\nrepeat {\n  print(x)\n  x <- x + 1\n  if (x > 3) break\n}', choices:['1  2  3','1  2  3  4','2  3  4','Infinite loop'],                      answer:'1  2  3',      exp:'Prints 1, 2, 3. When x becomes 4, if(x>3) is TRUE and break exits the loop.'},
+  {type:'result',topic:'Loops',      color:'bg-green',  text:'What happens when you run this code?',                                                                                            code:'while (TRUE) {\n  print("hello")\n}',                      choices:['Infinite loop — never stops','Prints "hello" once','Prints nothing','Returns an error'], answer:'Infinite loop — never stops', exp:'The condition is always TRUE and there is no break — this is an infinite loop.'},
+  {type:'result',topic:'Loops',      color:'bg-purple', text:'What does this print?',                                                                                                           code:'for (i in 1:4) {\n  print(i^2)\n}',                        choices:['1  4  9  16','1  2  3  4','2  4  6  8','1  4  9'],                                  answer:'1  4  9  16',  exp:'i=1→1, i=2→4, i=3→9, i=4→16. Each i^2 is printed: 1, 4, 9, 16.'},
+
+  // -- DATA VISUALIZATION----------------------------------─
+  {type:'mc',    topic:'Data Viz',   color:'bg-orange', text:'Which R function creates a pie chart?',                                                                                           code:null, choices:['pie()','barplot()','hist()','boxplot()'],                                                                                                 answer:'pie()',        exp:'pie(values, labels) creates a pie chart. values = slice sizes, labels = names.'},
+  {type:'mc',    topic:'Data Viz',   color:'bg-orange', text:'Which function creates a histogram in R?',                                                                                        code:null, choices:['hist()','pie()','boxplot()','plot()'],                                                                                                    answer:'hist()',       exp:'hist(values) creates a histogram showing the frequency distribution of data.'},
+  {type:'mc',    topic:'Data Viz',   color:'bg-orange', text:'In boxplot(mpg ~ cyl, data=mtcars), what is the y (response) variable?',                                                          code:null, choices:['mpg','cyl','mtcars','data'],                                                                                                              answer:'mpg',          exp:'In formula y ~ x, mpg is the y variable and cyl is the x (grouping) variable.'},
+  {type:'mc',    topic:'Data Viz',   color:'bg-orange', text:'What does notch=TRUE add to a boxplot?',                                                                                          code:null, choices:['A notch for comparing medians','A title','Gridlines','Color to the boxes'],                                                               answer:'A notch for comparing medians', exp:'notch=TRUE adds a notch shape to visually compare medians between groups.'},
+  {type:'mc',    topic:'Data Viz',   color:'bg-orange', text:'In base R plot(), type="p" means:',                                                                                               code:null, choices:['points','pie','polygon','path'],                                                                                                          answer:'points',       exp:'type="p" plots individual points (scatter). type="l"=lines, type="o"=points and lines.'},
+  {type:'mc',    topic:'Data Viz',   color:'bg-orange', text:'In base R plot(), type="l" means:',                                                                                               code:null, choices:['lines','labels','list','loop'],                                                                                                           answer:'lines',        exp:'type="l" creates a line chart connecting data points.'},
+  {type:'blank', topic:'Data Viz',   color:'bg-orange', text:'Fill in the blank — group mpg by cylinder in a boxplot:',                                                                         code:'boxplot(mpg ___ cyl, data=mtcars)',                         choices:['~','$','==','->'],                                                                  answer:'~',            exp:'~ is the formula operator in R. mpg ~ cyl means "group mpg by cyl".'},
+  {type:'enum',  topic:'Data Viz',   color:'bg-orange', text:'Which group contains ONLY base R data visualization functions?',                                                                  code:null, choices:['pie(), barplot(), boxplot(), hist(), plot()','ggplot(), geom_point(), aes()','xmlParse(), xmlRoot(), xmlSize()','read.csv(), subset()'],   answer:'pie(), barplot(), boxplot(), hist(), plot()', exp:'pie, barplot, boxplot, hist, and plot are all base R chart functions built into the language.'},
+
+  // -- DATA SCIENCE----------------------------------------─
+  {type:'mc',    topic:'Data Science',color:'bg-blue',  text:'Data Science turns raw data into:',                                                                                               code:null, choices:['Understanding, insight, and knowledge','Charts, graphs, and tables','Scripts and functions','CSV and XML files'],                          answer:'Understanding, insight, and knowledge', exp:'Data Science discovers hidden patterns to turn raw data into understanding, insight, and knowledge.'},
+  {type:'mc',    topic:'Data Science',color:'bg-blue',  text:'Which analytics method predicts the possibility of a future event?',                                                               code:null, choices:['Predictive Causal Analytics','Prescriptive Analytics','Unsupervised Learning','Data Exploration'],                                         answer:'Predictive Causal Analytics', exp:'Predictive Causal Analytics is used when you need a model that predicts the possibility of a future event.'},
+  {type:'mc',    topic:'Data Science',color:'bg-blue',  text:'Which analytics type not only predicts but also suggests actions?',                                                                code:null, choices:['Prescriptive Analytics','Predictive Causal Analytics','Supervised Learning','Data Exploration'],                                           answer:'Prescriptive Analytics', exp:'Prescriptive Analytics goes beyond prediction — it suggests actions and their possible results.'},
+  {type:'mc',    topic:'Data Science',color:'bg-blue',  text:'Machine learning using existing labeled data for prediction is called:',                                                           code:null, choices:['Supervised Learning','Unsupervised Learning','Prescriptive Analytics','Data Exploration'],                                                 answer:'Supervised Learning', exp:'Supervised Learning uses labeled/historical data to train a model for future predictions.'},
+  {type:'mc',    topic:'Data Science',color:'bg-blue',  text:'Clustering is a common example of which ML type?',                                                                                code:null, choices:['Unsupervised Learning','Supervised Learning','Predictive Analytics','Prescriptive Analytics'],                                             answer:'Unsupervised Learning', exp:'Unsupervised Learning discovers hidden patterns without predefined labels. Clustering is its most common example.'},
+  {type:'mc',    topic:'Data Science',color:'bg-blue',  text:'A negative correlation means:',                                                                                                   code:null, choices:['As one variable increases, the other decreases','Both variables increase together','Variables have no relationship','Both decrease together'], answer:'As one variable increases, the other decreases', exp:'Negative correlation: one variable goes up as the other goes down. Example: larger engine → lower fuel efficiency.'},
+  {type:'enum',  topic:'Data Science',color:'bg-blue',  text:'Which are the TWO machine learning types covered in the lesson?',                                                                  code:null, choices:['Supervised Learning and Unsupervised Learning','Predictive and Prescriptive only','Clustering and Regression only','Deep and Reinforcement Learning'], answer:'Supervised Learning and Unsupervised Learning', exp:'The lesson covers Supervised (prediction) and Unsupervised (pattern discovery) Learning.'},
+
+  // -- GGPLOT2 / TIDYVERSE----------------------------------
+  {type:'mc',    topic:'ggplot2',    color:'bg-purple', text:'What does aes() do in ggplot2?',                                                                                                  code:null, choices:['Maps variables to visual properties (x, y, color, size, shape)','Creates a new data frame','Parses XML files','Filters rows'],            answer:'Maps variables to visual properties (x, y, color, size, shape)', exp:'aes() = aesthetic mapping. It links data variables to visual properties like position, color, and size.'},
+  {type:'mc',    topic:'ggplot2',    color:'bg-purple', text:'What does geom_point() create in ggplot2?',                                                                                       code:null, choices:['A scatter plot (individual points)','A smooth curve','A histogram','Subplots by category'],                                               answer:'A scatter plot (individual points)', exp:'geom_point() plots individual data points, creating a scatter plot.'},
+  {type:'mc',    topic:'ggplot2',    color:'bg-purple', text:'What does facet_wrap(~ class) do?',                                                                                               code:null, choices:['Creates subplots split by class','Changes point colors','Filters data by class','Adds a legend'],                                         answer:'Creates subplots split by class', exp:'facet_wrap(~ class) splits the plot into small subplots, one for each category of class.'},
+  {type:'mc',    topic:'ggplot2',    color:'bg-purple', text:'What does the ~ symbol mean in facet_wrap(~ class)?',                                                                             code:null, choices:['"by" or "as a function of"','Not equal to','Approximately equal','Pipe operator'],                                                        answer:'"by" or "as a function of"', exp:'In R formula notation, ~ means "by" or "as a function of". facet_wrap(~ class) = subplots by class.'},
+  {type:'mc',    topic:'ggplot2',    color:'bg-purple', text:'What does geom_smooth() add to a ggplot?',                                                                                        code:null, choices:['A smooth trend curve','Individual points','Subplots by variable','Bar chart'],                                                            answer:'A smooth trend curve', exp:'geom_smooth() fits and displays a smooth curve through the data — useful for showing trends.'},
+  {type:'mc',    topic:'ggplot2',    color:'bg-purple', text:'What does geom_line() create?',                                                                                                   code:null, choices:['Lines connecting data points','A scatter plot','A pie chart','Subplots by variable'],                                                     answer:'Lines connecting data points', exp:'geom_line() connects data points with lines — useful for time series and sequential data.'},
+  {type:'tf',    topic:'ggplot2',    color:'bg-purple', text:'tibble() is preferred over the deprecated data_frame() in newer tidyverse versions.',                                              code:null, choices:['True','False'],                                                                                                                           answer:'True',         exp:'data_frame() is deprecated. Always use tibble() to create tibbles in modern tidyverse code.'},
+  {type:'mc',    topic:'ggplot2',    color:'bg-purple', text:'A Facet in ggplot2 is:',                                                                                                          code:null, choices:['A small subplot showing a subset of data','The color mapping of a geom','The dataset being plotted','The axis labels'],                   answer:'A small subplot showing a subset of data', exp:'Facets split a plot into small subplots, each showing a different subset of the data.'},
+  {type:'blank', topic:'ggplot2',    color:'bg-purple', text:'Fill in the blank — create a scatter plot of displ vs hwy:',                                                                      code:'ggplot(data=mpg) +\n  ___(mapping=aes(x=displ, y=hwy))',  choices:['geom_point()','geom_line()','geom_smooth()','geom_bar()'],                          answer:'geom_point()', exp:'geom_point() creates a scatter plot by drawing individual data points.'},
+  {type:'blank', topic:'ggplot2',    color:'bg-purple', text:'Fill in the blank — split ggplot into subplots by vehicle class:',                                                                code:'ggplot(data=mpg) +\n  geom_point(aes(x=displ, y=hwy)) +\n  facet_wrap(___ class, nrow=2)', choices:['~','$','@','::'],                                answer:'~',            exp:'~ is the formula operator — facet_wrap(~ class) means "create subplots by class".'},
+  {type:'blank', topic:'ggplot2',    color:'bg-purple', text:'Fill in the blank — add a red line to the BOD plot:',                                                                             code:'ggplot(data=BOD, mapping=aes(x=Time, y=demand)) +\n  geom_point(size=5) +\n  ___(color="red")', choices:['geom_line()','geom_smooth()','geom_bar()','geom_point()'], answer:'geom_line()', exp:'geom_line() connects the points with lines. color="red" makes the line red.'},
+  {type:'blank', topic:'ggplot2',    color:'bg-purple', text:'Fill in the blank — load the package needed for read_excel():',                                                                    code:'library(___)\ninput <- read_excel("input.xlsx")',          choices:['readxl','xlsx','XML','gdata'],                                                       answer:'readxl',       exp:'read_excel() is from the readxl package. library(readxl) must be called first.'},
+  {type:'mc',    topic:'ggplot2',    color:'bg-purple', text:'In the ggplot mpg scatter plot, as engine size (displ) increases, hwy (fuel efficiency) decreases. This shows:',                 code:null, choices:['Negative correlation','Positive correlation','No correlation','Causation'],                                                               answer:'Negative correlation', exp:'One variable increasing as the other decreases is called a negative correlation.'},
+
+  // -- ENUMERATION------------------------------------------
+  {type:'enum',  topic:'Packages',   color:'bg-green',  text:'Which group contains ALL Excel-related R packages?',                                                                              code:null, choices:['xlsx, XLConnect, gdata, readxl','xlsx, XLConnect, grepl, readxl','xlsx, XML, gdata, readxl','xlsx, XLConnect, gdata, xmlParse'],         answer:'xlsx, XLConnect, gdata, readxl', exp:'The four Excel packages are: xlsx, XLConnect, gdata, and readxl. grepl is for pattern matching; XML is for XML files.'},
+  {type:'enum',  topic:'XML',        color:'bg-orange', text:'Which group contains ONLY XML-related functions?',                                                                                code:null, choices:['xmlParse(), xmlRoot(), xmlSize(), xmlToDataFrame()','read.csv(), write.csv(), subset()','getwd(), setwd(), ncol()','pie(), barplot(), hist()'], answer:'xmlParse(), xmlRoot(), xmlSize(), xmlToDataFrame()', exp:'All four are XML package functions used to parse, navigate, and convert XML data.'},
+  {type:'enum',  topic:'ggplot2',    color:'bg-purple', text:'Which are valid ggplot2 aesthetic (aes()) properties?',                                                                          code:null, choices:['x, y, color, size, shape','x, y, width, height, border','left, right, top, bottom, center','data, geom, facet, theme, scale'],           answer:'x, y, color, size, shape', exp:'aes() maps data to visual properties: x, y, color, size, and shape are the key ones covered.'},
+  {type:'enum',  topic:'Working Dir',color:'bg-blue',   text:'Which path formats are ACCEPTED in R?',                                                                                          code:null, choices:['C:/web/Sample  AND  C:\\\\web\\\\Sample','C:\\web\\Sample  AND  C:/web/Sample','C:\\web\\Sample only','Any format including single backslash'], answer:'C:/web/Sample  AND  C:\\\\web\\\\Sample', exp:'Forward slashes and double backslashes both work. Single backslash is an escape character and causes errors.'},
+];
+
+// -- QUIZ 4 STATE--
+const Q4_COUNT = 20;
+let cur4 = 0, score4 = 0;
+let activeQ4 = [];
+let answered4 = [];
+let q4Missed = [];
+
+const typeStyles4 = {
+  mc:    { bg:'rgba(88,166,255,0.15)',  color:'#58a6ff', label:'🔵 Multiple Choice'  },
+  tf:    { bg:'rgba(63,185,80,0.15)',   color:'#3fb950', label:'✅ True / False'      },
+  enum:  { bg:'rgba(240,136,62,0.15)', color:'#f0883e', label:'📋 Enumeration'       },
+  result:{ bg:'rgba(233,121,249,0.15)',color:'#e879f9', label:'💻 Know the Result'   },
+  blank: { bg:'rgba(251,191,36,0.15)', color:'#fbbf24', label:'✏️ Fill in the Blank' }
+};
+
+function startQuiz4() {
+  // Pick Q4_COUNT unique random questions from master pool
+  const pool = shuffle([...masterPool]);
+  activeQ4 = pool.slice(0, Q4_COUNT);
+  cur4 = 0; score4 = 0;
+  answered4 = new Array(Q4_COUNT).fill(false);
+  q4Missed = [];
+
+  document.getElementById('q4StartScreen').style.display = 'none';
+  document.getElementById('q4Container').style.display = 'block';
+  document.getElementById('scoreBox4').style.display = 'none';
+  renderQ4();
+}
+
+function renderQ4() {
+  const q = activeQ4[cur4];
+  document.getElementById('q4Num').textContent = `Q${cur4+1}`;
+  document.getElementById('q4Counter').textContent = `Question ${cur4+1} of ${Q4_COUNT}`;
+  document.getElementById('q4Score').textContent = `Score: ${score4}`;
+  document.getElementById('progressFill4').style.width = `${((cur4+1)/Q4_COUNT)*100}%`;
+
+  // Type badge
+  const ts = typeStyles4[q.type];
+  const typeTag = document.getElementById('q4TypeTag');
+  typeTag.textContent = ts.label;
+  typeTag.style.cssText = `font-size:10px;padding:2px 10px;border-radius:20px;font-weight:600;font-family:'JetBrains Mono',monospace;letter-spacing:.05em;background:${ts.bg};color:${ts.color};border:1px solid ${ts.color};display:inline-block;margin-bottom:4px;`;
+
+  // Topic badge
+  const topicTag = document.getElementById('q4TopicTag');
+  topicTag.className = `q-topic-tag ${q.color}`;
+  topicTag.textContent = q.topic;
+
+  document.getElementById('q4Text').textContent = q.text;
+
+  const codeEl = document.getElementById('q4CodeBlock');
+  if (q.code) { codeEl.style.display = 'block'; codeEl.textContent = q.code; }
+  else { codeEl.style.display = 'none'; }
+
+  // Always shuffle choices in Quiz 4
+  const displayChoices = shuffle([...q.choices]);
+  const choicesEl = document.getElementById('q4Choices');
+  choicesEl.innerHTML = '';
+  displayChoices.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.textContent = c;
+    btn.onclick = () => selectChoice4(btn, c, q);
+    if (answered4[cur4]) {
+      btn.classList.add('disabled');
+      if (c === q.answer) btn.classList.add('correct');
+    }
+    choicesEl.appendChild(btn);
+  });
+
+  const exp = document.getElementById('q4Exp');
+  exp.className = 'explanation' + (answered4[cur4] ? ' show' : '');
+  exp.innerHTML = `<strong>💡 Explanation:</strong> ${q.exp}`;
+
+  document.getElementById('prev4Btn').disabled = cur4 === 0;
+  document.getElementById('next4Btn').disabled = !answered4[cur4];
+  document.getElementById('next4Btn').textContent = (cur4 === Q4_COUNT-1 && answered4[cur4]) ? 'Finish ✓' : 'Next →';
+}
+
+function selectChoice4(btn, choice, q) {
+  if (answered4[cur4]) return;
+  answered4[cur4] = true;
+  const ok = choice === q.answer;
+  if (ok) { score4++; } else { q4Missed.push({idx:cur4+1, q:q}); }
+  btn.classList.add(ok ? 'correct' : 'wrong');
+  if (!ok) document.querySelectorAll('#q4Choices .choice').forEach(b => { if (b.textContent === q.answer) b.classList.add('correct'); });
+  document.querySelectorAll('#q4Choices .choice').forEach(b => b.classList.add('disabled'));
+  document.getElementById('q4Exp').classList.add('show');
+  document.getElementById('q4Score').textContent = `Score: ${score4}`;
+  document.getElementById('next4Btn').disabled = false;
+  if (cur4 === Q4_COUNT-1) document.getElementById('next4Btn').textContent = 'Finish ✓';
+}
+
+function nextQ4() {
+  if (cur4 === Q4_COUNT-1) { showFinalScore4(); return; }
+  cur4++;
+  renderQ4();
+}
+
+function prevQ4() {
+  if (cur4 > 0) { cur4--; renderQ4(); }
+}
+
+function showFinalScore4() {
+  document.getElementById('q4Container').style.display = 'none';
+  const box = document.getElementById('scoreBox4');
+  box.style.display = 'block';
+  document.getElementById('finalScore4').textContent = `${score4}/${Q4_COUNT}`;
+  const pct = Math.round((score4/Q4_COUNT)*100);
+  document.getElementById('scoreMsg4').textContent =
+    pct >= 90 ? '🏆 Perfect! You know all topics inside out!' :
+    pct >= 75 ? '👍 Strong result! A few topics to polish.' :
+    pct >= 60 ? '📚 Good effort — review what you missed and try a new round.' :
+                '💪 Keep practicing — each round is a different mix!';
+
+  // Missed questions list
+  const missedEl = document.getElementById('q4MissedList');
+  if (q4Missed.length > 0) {
+    let html = '<div style="font-size:13px;font-weight:600;color:var(--accent5);margin-bottom:10px">Missed ' + q4Missed.length + ' question' + (q4Missed.length>1?'s':'') + ':</div>';
+    q4Missed.forEach(m => {
+      html += '<div style="background:#1e1010;border:1px solid #3d1a1a;border-left:3px solid #ff7b72;border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:12px;line-height:1.6">';
+      html += '<div style="color:#ff7b72;font-weight:600;margin-bottom:4px">Q' + m.idx + ' &middot; ' + m.q.topic + '</div>';
+      html += '<div style="color:var(--text3);margin-bottom:4px">' + m.q.text + '</div>';
+      html += '<div style="color:#3fb950">Correct: ' + m.q.answer + '</div>';
+      html += '</div>';
+    });
+    missedEl.innerHTML = html;
+  } else {
+    missedEl.innerHTML = '<div style="color:#3fb950;font-size:14px;font-weight:600;text-align:center">Perfect score! No missed questions!</div>';
+  }
+}
 
 document.querySelectorAll('.quick-table').forEach(table => {
   if (!table.parentElement.classList.contains('tbl-scroll')) {
