@@ -551,7 +551,8 @@ section-divider {
     <button class="tab" onclick="showSection('datasci')">🔬 Data Science</button>
     <button class="tab" onclick="showSection('ggplot')">🎨 ggplot2</button>
     <button class="tab" onclick="showSection('mustmemorize')">📝 Must Memorize</button>
-    <button class="tab" onclick="showSection('quiz')">🧠 Quiz</button>
+    <button class="tab" onclick="showSection('quiz')">🧠 Quiz 1</button>
+    <button class="tab" onclick="showSection('quiz2')">🧠 Quiz 2</button>
     <button class="tab" onclick="showSection('answers')">✅ Answer Key</button>
   </div>
 
@@ -1443,8 +1444,8 @@ data<span class="kw">$</span>column_name                    <span class="cm"># a
     <div class="topic-header">
       <div class="topic-icon" style="background:#1a2c3d">🧠</div>
       <div>
-        <div class="topic-title c-blue">Practice Quiz</div>
-        <div class="topic-desc">Test yourself — all 43 questions</div>
+        <div class="topic-title c-blue">Quiz 1 — Original 43 Questions</div>
+        <div class="topic-desc">CSV · XML · Working Dir · Functions · Loops</div>
       </div>
     </div>
 
@@ -1473,7 +1474,48 @@ data<span class="kw">$</span>column_name                    <span class="cm"># a
       <div class="score-num" id="finalScore">0/43</div>
       <div class="score-label">Questions Answered Correctly</div>
       <div class="score-msg" id="scoreMsg"></div>
-      <button class="btn primary" style="margin-top:24px" onclick="restartQuiz()">Restart Quiz</button>
+      <button class="btn primary" style="margin-top:24px" onclick="restartQuiz()">Restart Quiz 1</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       QUIZ 2
+  ════════════════════════════════════════════════ -->
+  <div class="section" id="quiz2">
+    <div class="topic-header">
+      <div class="topic-icon" style="background:#1e1630">🧠</div>
+      <div>
+        <div class="topic-title c-purple">Quiz 2 — New Topics</div>
+        <div class="topic-desc">Data Viz · Data Science · ggplot2 · Tidyverse · Definitions</div>
+      </div>
+    </div>
+
+    <div id="q2Container">
+      <div class="quiz-progress">
+        <span id="q2Counter">Question 1 of 30</span>
+        <span id="q2Score">Score: 0</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill2" style="width:3%"></div></div>
+
+      <div class="q-card" id="q2Card">
+        <div class="q-num" id="q2Num">Q1</div>
+        <div id="q2TopicTag"></div>
+        <div class="q-text" id="q2Text"></div>
+        <div class="choices" id="q2Choices"></div>
+        <div class="explanation" id="q2Exp"></div>
+      </div>
+
+      <div class="q-nav">
+        <button class="btn" id="prev2Btn" onclick="prevQ2()" disabled>← Prev</button>
+        <button class="btn primary" id="next2Btn" onclick="nextQ2()" disabled>Next →</button>
+      </div>
+    </div>
+
+    <div class="score-box" id="scoreBox2">
+      <div class="score-num" id="finalScore2">0/30</div>
+      <div class="score-label">Questions Answered Correctly</div>
+      <div class="score-msg" id="scoreMsg2"></div>
+      <button class="btn primary" style="margin-top:24px" onclick="restartQuiz2()">Restart Quiz 2</button>
     </div>
   </div>
 
@@ -1671,10 +1713,144 @@ answerKeyData.forEach(item => {
   grid.appendChild(el);
 });
 
-// Init quiz
-renderQ();
+// ── QUIZ 2 DATA — New Topics ──
+const questions2 = [
+  // DEFINITIONS
+  { n:1, topic:'Data Science', color:'bg-blue', text:'Data Science is a discipline that turns raw data into:', choices:['understanding, insight, and knowledge','charts, graphs, and tables','scripts, loops, and functions','CSV, XML, and Excel files'], answer:'understanding, insight, and knowledge', exp:'Data Science uses tools, algorithms, and ML principles to discover hidden patterns and turn raw data into understanding, insight, and knowledge.' },
+  { n:2, topic:'Data Science', color:'bg-blue', text:'Which analytics method predicts the possibility of a future event?', choices:['Predictive Causal Analytics','Prescriptive Analytics','Unsupervised Learning','Data Exploration'], answer:'Predictive Causal Analytics', exp:'Predictive Causal Analytics is used when you need a model that predicts the possibility of a future event.' },
+  { n:3, topic:'Data Science', color:'bg-blue', text:'Which analytics type not only predicts outcomes but also suggests actions and possible results?', choices:['Prescriptive Analytics','Predictive Causal Analytics','Supervised Learning','Data Exploration'], answer:'Prescriptive Analytics', exp:'Prescriptive Analytics goes beyond prediction — it also suggests actions and shows possible results of each action.' },
+  { n:4, topic:'Data Science', color:'bg-blue', text:'Machine learning that uses existing labeled or historical data to train a model is called:', choices:['Supervised Learning','Unsupervised Learning','Prescriptive Analytics','Data Exploration'], answer:'Supervised Learning', exp:'Supervised Learning (Machine Learning for Prediction) uses labeled or historical data to train a model for future predictions.' },
+  { n:5, topic:'Data Science', color:'bg-blue', text:'Clustering is a common example of which machine learning type?', choices:['Unsupervised Learning','Supervised Learning','Predictive Analytics','Prescriptive Analytics'], answer:'Unsupervised Learning', exp:'Unsupervised Learning discovers hidden patterns without predefined labels. Clustering is its most common example.' },
+  { n:6, topic:'Data Science', color:'bg-blue', text:'The process of looking at data, generating hypotheses, and testing them quickly is called:', choices:['Data Exploration','Supervised Learning','Prescriptive Analytics','Data Cleaning'], answer:'Data Exploration', exp:'Data Exploration involves generating hypotheses, testing them quickly, and repeating the process to find promising leads.' },
+  { n:7, topic:'Data Science', color:'bg-blue', text:'A negative correlation in data means:', choices:['As one variable increases, the other decreases','Both variables increase together','Both variables decrease together','Variables have no relationship'], answer:'As one variable increases, the other decreases', exp:'Negative correlation: one variable goes up while the other goes down. Example: as engine size (displ) increases, fuel efficiency (hwy) decreases.' },
 
-// Auto-wrap all tables for horizontal scroll on mobile
+  // DEFINITIONS — TIDYVERSE / GGPLOT
+  { n:8, topic:'Tidyverse', color:'bg-purple', text:'What is a tibble (tbl_df)?', choices:['A modern version of a data frame with cleaner printing','A function to parse XML files','A loop that stops with break','An R package for Excel files'], answer:'A modern version of a data frame with cleaner printing', exp:'A tibble is a modern data frame — especially useful for large datasets because it prints more cleanly than a regular data frame.' },
+  { n:9, topic:'Tidyverse', color:'bg-purple', text:'In newer tidyverse versions, which function is preferred over the deprecated data_frame()?', choices:['tibble()','data.frame()','tbl_df()','as_tibble()'], answer:'tibble()', exp:'data_frame() is deprecated in newer tidyverse. Always use tibble() to create tibbles.' },
+  { n:10, topic:'ggplot2', color:'bg-purple', text:'What does aes() do in ggplot2?', choices:['Maps variables to visual properties like x, y, color, size, shape','Creates a new data frame from CSV','Parses an XML file','Filters rows in a data frame'], answer:'Maps variables to visual properties like x, y, color, size, shape', exp:'aes() = aesthetic mapping. It maps data variables to visual properties such as x-position, y-position, color, size, and shape.' },
+  { n:11, topic:'ggplot2', color:'bg-purple', text:'What does a Facet do in ggplot2?', choices:['Creates small subplots showing a subset of data','Connects data points with lines','Adds color to points','Filters the data frame'], answer:'Creates small subplots showing a subset of data', exp:'A facet splits the plot into small subplots, each showing a subset of the data — commonly created with facet_wrap().' },
+  { n:12, topic:'ggplot2', color:'bg-purple', text:'A Geom in ggplot2 is:', choices:['The geometric object used to represent data (points, lines, bars)','The dataset being plotted','The aesthetic mapping function','The axis labels'], answer:'The geometric object used to represent data (points, lines, bars)', exp:'A geom is the geometric object chosen to represent data — geom_point() for points, geom_line() for lines, etc.' },
+  { n:13, topic:'ggplot2', color:'bg-purple', text:'What does geom_point() create?', choices:['A scatter plot of individual points','A smooth trend curve','A histogram','A bar chart'], answer:'A scatter plot of individual points', exp:'geom_point() plots individual data points, creating a scatter plot.' },
+  { n:14, topic:'ggplot2', color:'bg-purple', text:'What does geom_smooth() add to a plot?', choices:['A smooth curve or trend line','Individual points','Vertical bars','Subplots by category'], answer:'A smooth curve or trend line', exp:'geom_smooth() fits and displays a smooth curve (trend line) through the data points.' },
+  { n:15, topic:'ggplot2', color:'bg-purple', text:'What does geom_line() create?', choices:['Lines connecting data points','A scatter plot','A pie chart','Subplots by variable'], answer:'Lines connecting data points', exp:'geom_line() connects data points with lines, useful for time series and sequential data.' },
+  { n:16, topic:'ggplot2', color:'bg-purple', text:'What does facet_wrap(~ class, nrow = 2) do?', choices:['Splits the plot into subplots by class in 2 rows','Changes point colors by class','Filters data by class','Creates a 2-column table'], answer:'Splits the plot into subplots by class in 2 rows', exp:'facet_wrap(~ class, nrow=2) creates a separate subplot for each vehicle class, arranged in 2 rows.' },
+  { n:17, topic:'ggplot2', color:'bg-purple', text:'In ggplot, adding color = class inside aes() does what?', choices:['Displays different vehicle classes in different colors','Makes all points the same color named class','Creates subplots by class','Filters only the class column'], answer:'Displays different vehicle classes in different colors', exp:'color = class inside aes() maps the class variable to color — each class gets a different color automatically.' },
+  { n:18, topic:'ggplot2', color:'bg-purple', text:'In the ggplot mpg dataset, plotting displ vs hwy shows a negative relationship. This means:', choices:['Larger engines tend to have lower fuel efficiency','Larger engines have higher fuel efficiency','Fuel efficiency is unrelated to engine size','Both displ and hwy increase together'], answer:'Larger engines tend to have lower fuel efficiency', exp:'The mpg plot shows a negative correlation: as engine displacement (displ) increases, highway fuel efficiency (hwy) decreases.' },
+  { n:19, topic:'ggplot2', color:'bg-purple', text:'Every ggplot2 plot must start with:', choices:['ggplot(data = ...) + a geom function','geom_point() alone','aes() mapping alone','library(ggplot2) + plot()'], answer:'ggplot(data = ...) + a geom function', exp:'Every ggplot starts with ggplot(data = ...) and requires at least one geom layer like + geom_point().' },
+  { n:20, topic:'ggplot2', color:'bg-purple', text:'What does the ~ symbol mean in facet_wrap(~ class)?', choices:['"by" or "as a function of"','Not equal to','Approximately equal','Pipe operator'], answer:'"by" or "as a function of"', exp:'In R formula notation, ~ means "by" or "as a function of". facet_wrap(~ class) means "create subplots by class".' },
+
+  // DATA VISUALIZATION
+  { n:21, topic:'Data Viz', color:'bg-orange', text:'Which R function creates a pie chart?', choices:['pie()','barplot()','hist()','boxplot()'], answer:'pie()', exp:'pie(values, labels) creates a pie chart. vtr contains the values/slices and name contains the labels.' },
+  { n:22, topic:'Data Viz', color:'bg-orange', text:'Which function creates a histogram in R?', choices:['hist()','pie()','boxplot()','plot()'], answer:'hist()', exp:'hist(values) creates a histogram showing the frequency distribution of data.' },
+  { n:23, topic:'Data Viz', color:'bg-orange', text:'In boxplot(mpg ~ cyl, data = mtcars), what does mpg ~ cyl mean?', choices:['Group mpg values by cyl','Multiply mpg by cyl','Subtract cyl from mpg','mpg is equal to cyl'], answer:'Group mpg values by cyl', exp:'mpg ~ cyl means "group mpg values according to cyl values." It uses formula syntax to split data into groups.' },
+  { n:24, topic:'Data Viz', color:'bg-orange', text:'What does notch = TRUE add to a boxplot?', choices:['A notch for visually comparing medians between groups','A title to the chart','Gridlines to the plot','Color to the boxes'], answer:'A notch for visually comparing medians between groups', exp:'notch = TRUE adds a notch to each box in the boxplot, which helps visually compare whether medians between groups differ.' },
+  { n:25, topic:'Data Viz', color:'bg-orange', text:'In a boxplot, what is the y variable in boxplot(mpg ~ cyl)?', choices:['mpg','cyl','mtcars','data'], answer:'mpg', exp:'In formula notation y ~ x, mpg is the y (response) variable and cyl is the x (grouping) variable.' },
+  { n:26, topic:'Data Viz', color:'bg-orange', text:'In base R plot(), the type letter "p" means:', choices:['points','pie','polygon','path'], answer:'points', exp:'In base R plot(), type="p" plots individual points (scatter plot). type="l" = lines, type="o" = points and lines.' },
+  { n:27, topic:'Data Viz', color:'bg-orange', text:'In base R plot(), the type letter "l" means:', choices:['lines','labels','loop','list'], answer:'lines', exp:'type="l" creates a line plot connecting data points.' },
+  { n:28, topic:'Data Viz', color:'bg-orange', text:'In base R plot(), the type letter "o" or "O" means:', choices:['points and lines','only points','only lines','open circles'], answer:'points and lines', exp:'type="o" or "O" overlays both points and lines on the same plot.' },
+
+  // XML NEW FUNCTIONS
+  { n:29, topic:'XML', color:'bg-orange', text:'Which function counts the number of nodes in an XML root?', choices:['xmlSize()','xmlCount()','xmlLength()','xmlNodes()'], answer:'xmlSize()', exp:'xmlSize(rootnode) returns the number of child nodes inside the root node of a parsed XML document.' },
+  { n:30, topic:'XML', color:'bg-orange', text:'Which function converts an XML file directly into a data frame in R?', choices:['xmlToDataFrame()','xmlParse()','xmlRoot()','as.data.frame(xml)'], answer:'xmlToDataFrame()', exp:'xmlToDataFrame("record.xml") reads and converts the XML file directly into an R data frame in one step.' },
+];
+
+// ── QUIZ 2 STATE ──
+let cur2 = 0;
+let score2 = 0;
+let answered2 = new Array(questions2.length).fill(false);
+
+function renderQ2() {
+  const q = questions2[cur2];
+  document.getElementById('q2Num').textContent = `Q${q.n}`;
+  document.getElementById('q2Counter').textContent = `Question ${cur2+1} of ${questions2.length}`;
+  document.getElementById('q2Score').textContent = `Score: ${score2}`;
+  document.getElementById('progressFill2').style.width = `${((cur2+1)/questions2.length)*100}%`;
+
+  const tag = document.getElementById('q2TopicTag');
+  tag.className = `q-topic-tag ${q.color}`;
+  tag.textContent = q.topic;
+
+  document.getElementById('q2Text').textContent = q.text;
+
+  const choicesEl = document.getElementById('q2Choices');
+  choicesEl.innerHTML = '';
+  q.choices.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.textContent = c;
+    btn.onclick = () => selectChoice2(btn, c, q);
+    if (answered2[cur2]) {
+      btn.classList.add('disabled');
+      if (c === q.answer) btn.classList.add('correct');
+    }
+    choicesEl.appendChild(btn);
+  });
+
+  const exp = document.getElementById('q2Exp');
+  exp.className = 'explanation' + (answered2[cur2] ? ' show' : '');
+  exp.innerHTML = `<strong>💡 Explanation:</strong> ${q.exp}`;
+
+  document.getElementById('prev2Btn').disabled = cur2 === 0;
+  document.getElementById('next2Btn').disabled = !answered2[cur2];
+  if (cur2 === questions2.length - 1 && answered2[cur2]) {
+    document.getElementById('next2Btn').textContent = 'Finish ✓';
+  } else {
+    document.getElementById('next2Btn').textContent = 'Next →';
+  }
+}
+
+function selectChoice2(btn, choice, q) {
+  if (answered2[cur2]) return;
+  answered2[cur2] = true;
+  const isCorrect = choice === q.answer;
+  if (isCorrect) score2++;
+  btn.classList.add(isCorrect ? 'correct' : 'wrong');
+  if (!isCorrect) {
+    document.querySelectorAll('#q2Choices .choice').forEach(b => {
+      if (b.textContent === q.answer) b.classList.add('correct');
+    });
+  }
+  document.querySelectorAll('#q2Choices .choice').forEach(b => b.classList.add('disabled'));
+  document.getElementById('q2Exp').classList.add('show');
+  document.getElementById('q2Score').textContent = `Score: ${score2}`;
+  document.getElementById('next2Btn').disabled = false;
+  if (cur2 === questions2.length - 1) document.getElementById('next2Btn').textContent = 'Finish ✓';
+}
+
+function nextQ2() {
+  if (cur2 === questions2.length - 1) { showFinalScore2(); return; }
+  cur2++;
+  renderQ2();
+}
+
+function prevQ2() {
+  if (cur2 > 0) { cur2--; renderQ2(); }
+}
+
+function showFinalScore2() {
+  document.getElementById('q2Container').style.display = 'none';
+  const box = document.getElementById('scoreBox2');
+  box.classList.add('show');
+  document.getElementById('finalScore2').textContent = `${score2}/${questions2.length}`;
+  const pct = Math.round((score2/questions2.length)*100);
+  let msg = pct >= 90 ? '🏆 Excellent! You know the new topics cold!' :
+            pct >= 75 ? '👍 Good job! Review the ones you missed.' :
+            pct >= 60 ? '📚 Getting there — check the Data Viz and ggplot2 tabs.' :
+                        '💪 More review needed — go through the new topic tabs again.';
+  document.getElementById('scoreMsg2').textContent = msg;
+}
+
+function restartQuiz2() {
+  cur2 = 0; score2 = 0;
+  answered2 = new Array(questions2.length).fill(false);
+  document.getElementById('q2Container').style.display = 'block';
+  document.getElementById('scoreBox2').classList.remove('show');
+  renderQ2();
+}
+
+// Init both quizzes
+renderQ();
+renderQ2();
 document.querySelectorAll('.quick-table').forEach(table => {
   if (!table.parentElement.classList.contains('tbl-scroll')) {
     const wrapper = document.createElement('div');
